@@ -49,5 +49,21 @@ namespace PresentationLayer_EMS
             DataView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
+
+        public static void SearchData(DataGridView DataGrid, string RowSearching, string Data)
+        {
+            foreach (DataGridViewRow row in DataGrid.Rows)
+            {
+                if (row.Cells[RowSearching].Value != null && row.Cells[RowSearching].Value.ToString().ToLower().Contains(Data))
+                {
+                    row.Visible = true;
+                }
+                else
+                {
+                    row.Visible = false;
+                }
+            }
+
+        }
     }
 }

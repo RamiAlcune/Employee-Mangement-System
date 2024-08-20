@@ -83,5 +83,17 @@ namespace PresentationLayer_EMS
                 Settings.SendMessage(Handle, Settings.WM_NCLBUTTONDOWN, Settings.HTCAPTION, 0);
             }
         }
+
+
+
+        private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Settings.SearchData(DGV_Department, "DepartmentName", tbSearch.Text.ToLower());
+        }
+
+        private void tbMainSearchingByName_KeyUp(object sender, KeyEventArgs e)
+        {
+            Settings.SearchData(DGV_Main, "FirstName", tbMainSearchingByName.Text.ToLower());
+        }
     }
 }
