@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer_EMS
 {
-    public class Class1
+    public static class DataAccessSettings
     {
+        public static string ConnectionString = "Server=.;Database=Employee_Management;User Id=sa;Password=sa123456;";
     }
 }
