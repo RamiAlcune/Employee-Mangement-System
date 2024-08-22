@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer_ESM.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace PresentationLayer_EMS
 {
     public partial class frmLogin : Form
     {
+        public static int currentPermissions = 0;
         public frmLogin()
         {
             InitializeComponent();
@@ -27,6 +29,17 @@ namespace PresentationLayer_EMS
                     Settings.ReleaseCapture();
                     Settings.SendMessage(Handle, Settings.WM_NCLBUTTONDOWN, Settings.HTCAPTION, 0);
                 }
+            }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            currentPermissions = clsUsers.IsUserNameAndPasswordAreValid(tbUserName.Text, tbPassword.Text);
+            if ( currentPermissions != -1)
+            {
+                frmMain frm1 = new frmMain();
+                this.Hide();
+                frm1.ShowDialog();
             }
         }
     }

@@ -50,7 +50,7 @@
             this.sssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DepartmenetTab = new System.Windows.Forms.TabPage();
-            this.tbSearch = new Guna.UI2.WinForms.Guna2TextBox();
+            this.tbDepartmentSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.DGV_Department = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnAdd = new Guna.UI2.WinForms.Guna2Button();
             this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
@@ -272,7 +272,7 @@
             // DepartmenetTab
             // 
             this.DepartmenetTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
-            this.DepartmenetTab.Controls.Add(this.tbSearch);
+            this.DepartmenetTab.Controls.Add(this.tbDepartmentSearch);
             this.DepartmenetTab.Controls.Add(this.DGV_Department);
             this.DepartmenetTab.Controls.Add(this.btnAdd);
             this.DepartmenetTab.Controls.Add(this.btnDelete);
@@ -284,27 +284,27 @@
             this.DepartmenetTab.Tag = "2";
             this.DepartmenetTab.Text = "Department";
             // 
-            // tbSearch
+            // tbDepartmentSearch
             // 
-            this.tbSearch.Animated = true;
-            this.tbSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbSearch.DefaultText = "";
-            this.tbSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.tbSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.tbSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-            this.tbSearch.ForeColor = System.Drawing.Color.Black;
-            this.tbSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbSearch.Location = new System.Drawing.Point(6, 8);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.PasswordChar = '\0';
-            this.tbSearch.PlaceholderText = "Search By DepartmentName";
-            this.tbSearch.SelectedText = "";
-            this.tbSearch.Size = new System.Drawing.Size(275, 22);
-            this.tbSearch.TabIndex = 8;
-            this.tbSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSearch_KeyPress);
+            this.tbDepartmentSearch.Animated = true;
+            this.tbDepartmentSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.tbDepartmentSearch.DefaultText = "";
+            this.tbDepartmentSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.tbDepartmentSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.tbDepartmentSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbDepartmentSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbDepartmentSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbDepartmentSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+            this.tbDepartmentSearch.ForeColor = System.Drawing.Color.Black;
+            this.tbDepartmentSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbDepartmentSearch.Location = new System.Drawing.Point(6, 8);
+            this.tbDepartmentSearch.Name = "tbDepartmentSearch";
+            this.tbDepartmentSearch.PasswordChar = '\0';
+            this.tbDepartmentSearch.PlaceholderText = "Search By DepartmentName";
+            this.tbDepartmentSearch.SelectedText = "";
+            this.tbDepartmentSearch.Size = new System.Drawing.Size(275, 22);
+            this.tbDepartmentSearch.TabIndex = 8;
+            this.tbDepartmentSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSearch_KeyPress);
             // 
             // DGV_Department
             // 
@@ -704,7 +704,7 @@
         private Guna.UI2.WinForms.Guna2Button btnAdd;
         private Guna.UI2.WinForms.Guna2Button btnDelete;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_Department;
-        private Guna.UI2.WinForms.Guna2TextBox tbSearch;
+        private Guna.UI2.WinForms.Guna2TextBox tbDepartmentSearch;
         private Guna.UI2.WinForms.Guna2TextBox tbMainSearchingByName;
         private Guna.UI2.WinForms.Guna2TextBox tbSearchByRole;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_Users;

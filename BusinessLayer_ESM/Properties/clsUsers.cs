@@ -15,5 +15,9 @@ namespace BusinessLayer_ESM.Properties
             DataTable dt = clsUsersData.GetAllUsers();
             return dt;
         }
+        public static int IsUserNameAndPasswordAreValid(string UserName,string Password)
+        {
+            return clsUsersData.IsUserNameAndPasswordAreValid(UserName,Password);
+        }
     }
 }

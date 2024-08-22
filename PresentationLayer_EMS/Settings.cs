@@ -55,6 +55,8 @@ namespace PresentationLayer_EMS
 
         public static void SearchData(DataGridView DataGrid, string RowSearching, string Data)
         {
+
+
             foreach (DataGridViewRow row in DataGrid.Rows)
             {
                 if (row.Cells[RowSearching].Value != null && row.Cells[RowSearching].Value.ToString().ToLower().Contains(Data))

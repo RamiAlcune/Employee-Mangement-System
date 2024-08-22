@@ -19,7 +19,7 @@ namespace PresentationLayer_EMS
 
     public partial class frmMain : Form
     {
-
+        private static DataTable _EmployeesList = clsEmployeeList.GetEmployeeList();
         public frmMain()
         {
             InitializeComponent();
@@ -47,10 +47,11 @@ namespace PresentationLayer_EMS
             switch (int.Parse(CurrentlySelected.Tag.ToString()))
             {
                 case 1:
-                    ListAllEmployees();
+                    if (PermissionsON(TabControl1.TabPages[0].Tag)) ListAllEmployees();
                     break;
                 case 2:
-                    ListAllDepartments();
+                    if (PermissionsON(TabControl1.TabPages[1].Tag)) ListAllDepartments();
+
                     break;
                 case 4:
                     //Should Add Method
@@ -82,7 +83,9 @@ namespace PresentationLayer_EMS
         public void ListAllEmployees()
         {
             Settings.DataGridViewStyles(DGV_Main);
-            DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
+            BindingSource bs = new BindingSource();
+            bs.DataSource = clsEmployeeList.GetEmployeeList();
+            DGV_Main.DataSource = bs;
             //Employee Data List:
             DGV_Main.Columns[0].HeaderText = "ID";
             DGV_Main.Columns[0].Width = 35;
@@ -103,20 +106,23 @@ namespace PresentationLayer_EMS
         {
             // Departmenet Data List:
             Settings.DataGridViewStyles(DGV_Department);
+            BindingSource bs = new BindingSource();
+            bs.DataSource = clsEmployeeList.GetEmployeeList();
+            DGV_Department.DataSource = bs;
             DGV_Department.Columns.Add("id", "ID");
             DGV_Department.Columns.Add("DepartmentName", "Department Name");
             DGV_Department.Columns["ID"].Width = 30;
             DGV_Department.Columns["DepartmentName"].Width = 500;
-            DGV_Department.Rows.Add(5, "Manage Employees");
-            DGV_Department.Rows.Add(6, "Junior Developer");
-            DGV_Department.Rows.Add(7, "Senior Developer");
-            DGV_Department.Rows.Add(8, "Intership Developer");
+
+
         }
         public void ListAllUsers()
         {
             // Users Data List
             Settings.DataGridViewStyles(DGV_Users);
-            DGV_Users.DataSource = clsUsers.GetAllUsers();
+            BindingSource bs = new BindingSource();
+            bs.DataSource = clsUsers.GetAllUsers();
+            DGV_Users.DataSource = bs;
             DGV_Users.Columns[0].HeaderText = "ID";
             DGV_Users.Columns[0].Width = 35;
             DGV_Users.Columns[1].HeaderText = "User Name";
@@ -145,17 +151,17 @@ namespace PresentationLayer_EMS
 
         private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Settings.SearchData(DGV_Department, "DepartmentName", tbSearch.Text.ToLower());
+            (DGV_Department.DataSource as BindingSource).Filter = $"DepartmentName LIKE '%{tbDepartmentSearch.Text.ToLower()}%'";
         }
 
         private void tbMainSearchingByName_KeyUp(object sender, KeyEventArgs e)
         {
-            Settings.SearchData(DGV_Main, "FirstName", tbMainSearchingByName.Text.ToLower());
+            (DGV_Main.DataSource as BindingSource).Filter = $"FirstName LIKE '%{tbMainSearchingByName.Text.ToLower()}%'";
         }
 
         private void tbSearchByRole_KeyUp(object sender, KeyEventArgs e)
         {
-            Settings.SearchData(DGV_Users, "Roles", tbSearchByRole.Text.ToLower());
+            (DGV_Users.DataSource as BindingSource).Filter = $"Roles LIKE '%{tbSearchByRole.Text.ToLower()}%'";
         }
 
         private void deleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,9 +179,9 @@ namespace PresentationLayer_EMS
         private int ReturnINT(object tag) { return int.Parse(tag.ToString()); }
         public bool PermissionsON(object Tag)
         {
-            int Permissions = 0;
-            if ((Settings.FullPermissions & Permissions) == 0) return true;
-            if ((Permissions & ReturnINT(Tag)) == 1) return true;
+            
+            if (frmLogin.currentPermissions == 0) return true;
+            if ((frmLogin.currentPermissions & ReturnINT(Tag)) == 1) return true;
             return false;
 
         }
