@@ -22,6 +22,7 @@ namespace PresentationLayer_EMS
         public const int WM_NCRBUTTONDOWN = 0xA4; // Added for right-click
         public const int HTCAPTION = 0x2;
 
+        public static int FullPermissions = 63;
 
         public static void DataGridViewStyles(DataGridView DataView)
         {
@@ -48,6 +49,8 @@ namespace PresentationLayer_EMS
             DataView.ColumnHeadersHeight = 30;
             DataView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(185, 63, 60);
+
         }
 
         public static void SearchData(DataGridView DataGrid, string RowSearching, string Data)

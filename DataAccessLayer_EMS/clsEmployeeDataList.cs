@@ -17,33 +17,36 @@ namespace DataAccessLayer_EMS
             DataTable dt = new DataTable();
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
-                
-                using (SqlCommand command = new SqlCommand(query, connection)) { 
-                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-                    if(reader.HasRows) dt.Load(reader);
+                    if (reader.HasRows) dt.Load(reader);
 
 
-                
+
                 }
 
             }
             return dt;
         }
-        
+
         public static bool DeleteEmployee(int ID)
         {
             int rowaffected = 0;
-            string query = @"DELETE FROM Employee WHERE @ID = EmployeeID";
+            string query = @"DELETE FROM dbo.Employee WHERE EmployeeID = @ID";
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ID", ID);
                     connection.Open();
-                    command.Parameters.AddWithValue("@ID",ID);
+
                     rowaffected = command.ExecuteNonQuery();
-                    if (rowaffected > 0) {
+                    if (rowaffected > 0)
+                    {
                         return true;
                     }
 
@@ -54,6 +57,30 @@ namespace DataAccessLayer_EMS
             return false;
         }
 
+        public static bool AddNewEmployee(string FirstName, string LastName, string Email, string Phone, DateTime HireDate, string DepartmentID)
+        {
+
+            string query = @"INSERT INTO Employee (FirstName,LastName,Email,Phone,HireDate,DepartmentID) VALUES (@FirstName,@LastName,@Email,@Phone,@HireDate,@DepartmentID)";
+
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@FirstName", FirstName);
+                    command.Parameters.AddWithValue("@LastName", LastName);
+                    command.Parameters.AddWithValue("@Email", Email);
+                    command.Parameters.AddWithValue("@Phone", Phone);
+                    command.Parameters.AddWithValue("@HireDate", HireDate);
+                    command.Parameters.AddWithValue("@DepartmentID", DepartmentID);
+                    object RowEffected = command.ExecuteScalar();
+                    if (RowEffected != DBNull.Value) return true;
+                }
+
+
+            }
+            return false;
+        }
 
     }
 }

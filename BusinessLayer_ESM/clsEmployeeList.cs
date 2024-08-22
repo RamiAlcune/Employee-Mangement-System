@@ -15,5 +15,17 @@ namespace BusinessLayer_ESM
             DataTable dt= clsEmployeeDataList.GetAllEmployees();
             return dt;
         }
+
+        public static bool DeleteEmployee(int ID)
+        {
+            if (clsEmployeeDataList.DeleteEmployee(ID))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

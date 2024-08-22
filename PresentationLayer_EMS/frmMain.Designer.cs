@@ -40,13 +40,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.Tab = new Guna.UI2.WinForms.Guna2TabControl();
+            this.TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
             this.TabDataList = new System.Windows.Forms.TabPage();
+            this.btnRefresh = new Guna.UI2.WinForms.Guna2Button();
             this.tbMainSearchingByName = new Guna.UI2.WinForms.Guna2TextBox();
             this.DGV_Main = new Guna.UI2.WinForms.Guna2DataGridView();
             this.MainMenu = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.ssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DepartmenetTab = new System.Windows.Forms.TabPage();
             this.tbSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.DGV_Department = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -64,8 +66,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
-            this.deleteEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tab.SuspendLayout();
+            this.frmMsg = new Guna.UI2.WinForms.Guna2MessageDialog();
+            this.TabControl1.SuspendLayout();
             this.TabDataList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Main)).BeginInit();
             this.MainMenu.SuspendLayout();
@@ -79,44 +81,47 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // Tab
+            // TabControl1
             // 
-            this.Tab.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.Tab.Controls.Add(this.TabDataList);
-            this.Tab.Controls.Add(this.DepartmenetTab);
-            this.Tab.Controls.Add(this.PositionsTab);
-            this.Tab.Controls.Add(this.SalaryTab);
-            this.Tab.Controls.Add(this.UsersTab);
-            this.Tab.Controls.Add(this.LogsTab);
-            this.Tab.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tab.ItemSize = new System.Drawing.Size(100, 80);
-            this.Tab.Location = new System.Drawing.Point(0, 37);
-            this.Tab.Name = "Tab";
-            this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(1184, 723);
-            this.Tab.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
-            this.Tab.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.Tab.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.Tab.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
-            this.Tab.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.Tab.TabButtonIdleState.BorderColor = System.Drawing.Color.Empty;
-            this.Tab.TabButtonIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(21)))), ((int)(((byte)(24)))));
-            this.Tab.TabButtonIdleState.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tab.TabButtonIdleState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(160)))), ((int)(((byte)(167)))));
-            this.Tab.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-            this.Tab.TabButtonSelectedState.BorderColor = System.Drawing.Color.Transparent;
-            this.Tab.TabButtonSelectedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
-            this.Tab.TabButtonSelectedState.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tab.TabButtonSelectedState.ForeColor = System.Drawing.Color.White;
-            this.Tab.TabButtonSelectedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(63)))), ((int)(((byte)(60)))));
-            this.Tab.TabButtonSize = new System.Drawing.Size(100, 80);
-            this.Tab.TabIndex = 0;
-            this.Tab.TabMenuBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
-            this.Tab.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
+            this.TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.TabControl1.Controls.Add(this.TabDataList);
+            this.TabControl1.Controls.Add(this.DepartmenetTab);
+            this.TabControl1.Controls.Add(this.PositionsTab);
+            this.TabControl1.Controls.Add(this.SalaryTab);
+            this.TabControl1.Controls.Add(this.UsersTab);
+            this.TabControl1.Controls.Add(this.LogsTab);
+            this.TabControl1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabControl1.ItemSize = new System.Drawing.Size(100, 80);
+            this.TabControl1.Location = new System.Drawing.Point(0, 37);
+            this.TabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.TabControl1.Name = "TabControl1";
+            this.TabControl1.Padding = new System.Drawing.Point(0, 0);
+            this.TabControl1.SelectedIndex = 0;
+            this.TabControl1.Size = new System.Drawing.Size(1184, 723);
+            this.TabControl1.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
+            this.TabControl1.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
+            this.TabControl1.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.TabControl1.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
+            this.TabControl1.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
+            this.TabControl1.TabButtonIdleState.BorderColor = System.Drawing.Color.Empty;
+            this.TabControl1.TabButtonIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(21)))), ((int)(((byte)(24)))));
+            this.TabControl1.TabButtonIdleState.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabControl1.TabButtonIdleState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(160)))), ((int)(((byte)(167)))));
+            this.TabControl1.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
+            this.TabControl1.TabButtonSelectedState.BorderColor = System.Drawing.Color.Transparent;
+            this.TabControl1.TabButtonSelectedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.TabControl1.TabButtonSelectedState.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabControl1.TabButtonSelectedState.ForeColor = System.Drawing.Color.White;
+            this.TabControl1.TabButtonSelectedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(63)))), ((int)(((byte)(60)))));
+            this.TabControl1.TabButtonSize = new System.Drawing.Size(100, 80);
+            this.TabControl1.TabIndex = 0;
+            this.TabControl1.TabMenuBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.TabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
             // TabDataList
             // 
             this.TabDataList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
+            this.TabDataList.Controls.Add(this.btnRefresh);
             this.TabDataList.Controls.Add(this.tbMainSearchingByName);
             this.TabDataList.Controls.Add(this.DGV_Main);
             this.TabDataList.ForeColor = System.Drawing.Color.White;
@@ -127,6 +132,24 @@
             this.TabDataList.TabIndex = 0;
             this.TabDataList.Tag = "1";
             this.TabDataList.Text = "Main";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Animated = true;
+            this.btnRefresh.AutoRoundedCorners = true;
+            this.btnRefresh.BorderRadius = 15;
+            this.btnRefresh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRefresh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnRefresh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRefresh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnRefresh.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(169)))), ((int)(((byte)(62)))));
+            this.btnRefresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(935, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(141, 32);
+            this.btnRefresh.TabIndex = 10;
+            this.btnRefresh.Text = "Refresh";
             // 
             // tbMainSearchingByName
             // 
@@ -156,11 +179,11 @@
             this.DGV_Main.AllowUserToDeleteRows = false;
             this.DGV_Main.AllowUserToResizeColumns = false;
             this.DGV_Main.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
             this.DGV_Main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Main.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -170,14 +193,14 @@
             this.DGV_Main.ColumnHeadersHeight = 4;
             this.DGV_Main.ContextMenuStrip = this.MainMenu;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_Main.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DGV_Main.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.DGV_Main.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(56)))), ((int)(((byte)(62)))));
             this.DGV_Main.Location = new System.Drawing.Point(0, 36);
             this.DGV_Main.MultiSelect = false;
             this.DGV_Main.Name = "DGV_Main";
@@ -186,27 +209,28 @@
             this.DGV_Main.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV_Main.Size = new System.Drawing.Size(1080, 676);
             this.DGV_Main.TabIndex = 0;
-            this.DGV_Main.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.DGV_Main.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark;
+            this.DGV_Main.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
             this.DGV_Main.ThemeStyle.AlternatingRowsStyle.Font = null;
             this.DGV_Main.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
             this.DGV_Main.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
             this.DGV_Main.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
             this.DGV_Main.ThemeStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
-            this.DGV_Main.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DGV_Main.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.DGV_Main.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(56)))), ((int)(((byte)(62)))));
+            this.DGV_Main.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
             this.DGV_Main.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.DGV_Main.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DGV_Main.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.DGV_Main.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV_Main.ThemeStyle.HeaderStyle.Height = 4;
             this.DGV_Main.ThemeStyle.ReadOnly = true;
-            this.DGV_Main.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.DGV_Main.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
             this.DGV_Main.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.DGV_Main.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DGV_Main.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.White;
             this.DGV_Main.ThemeStyle.RowsStyle.Height = 22;
-            this.DGV_Main.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DGV_Main.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DGV_Main.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            this.DGV_Main.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White;
             // 
             // MainMenu
             // 
@@ -237,6 +261,13 @@
             this.sssToolStripMenuItem.Name = "sssToolStripMenuItem";
             this.sssToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.sssToolStripMenuItem.Text = "Edit Employee";
+            // 
+            // deleteEmployeeToolStripMenuItem
+            // 
+            this.deleteEmployeeToolStripMenuItem.Name = "deleteEmployeeToolStripMenuItem";
+            this.deleteEmployeeToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.deleteEmployeeToolStripMenuItem.Text = "Delete Employee";
+            this.deleteEmployeeToolStripMenuItem.Click += new System.EventHandler(this.deleteEmployeeToolStripMenuItem_Click);
             // 
             // DepartmenetTab
             // 
@@ -269,7 +300,7 @@
             this.tbSearch.Location = new System.Drawing.Point(6, 8);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.PasswordChar = '\0';
-            this.tbSearch.PlaceholderText = "Search By Department";
+            this.tbSearch.PlaceholderText = "Search By DepartmentName";
             this.tbSearch.SelectedText = "";
             this.tbSearch.Size = new System.Drawing.Size(275, 22);
             this.tbSearch.TabIndex = 8;
@@ -395,7 +426,7 @@
             this.PositionsTab.Name = "PositionsTab";
             this.PositionsTab.Size = new System.Drawing.Size(1076, 715);
             this.PositionsTab.TabIndex = 2;
-            this.PositionsTab.Tag = "3";
+            this.PositionsTab.Tag = "4";
             this.PositionsTab.Text = "Positions";
             this.PositionsTab.UseVisualStyleBackColor = true;
             // 
@@ -405,7 +436,7 @@
             this.SalaryTab.Name = "SalaryTab";
             this.SalaryTab.Size = new System.Drawing.Size(1076, 715);
             this.SalaryTab.TabIndex = 3;
-            this.SalaryTab.Tag = "4";
+            this.SalaryTab.Tag = "8";
             this.SalaryTab.Text = "Salary";
             this.SalaryTab.UseVisualStyleBackColor = true;
             // 
@@ -418,7 +449,7 @@
             this.UsersTab.Name = "UsersTab";
             this.UsersTab.Size = new System.Drawing.Size(1076, 715);
             this.UsersTab.TabIndex = 4;
-            this.UsersTab.Tag = "5";
+            this.UsersTab.Tag = "16";
             this.UsersTab.Text = "Users";
             // 
             // tbSearchByRole
@@ -508,7 +539,7 @@
             this.LogsTab.Name = "LogsTab";
             this.LogsTab.Size = new System.Drawing.Size(1076, 715);
             this.LogsTab.TabIndex = 5;
-            this.LogsTab.Tag = "6";
+            this.LogsTab.Tag = "32";
             this.LogsTab.Text = "Logs";
             // 
             // DGV_Logs
@@ -616,11 +647,14 @@
             this.guna2ControlBox1.Size = new System.Drawing.Size(45, 38);
             this.guna2ControlBox1.TabIndex = 2;
             // 
-            // deleteEmployeeToolStripMenuItem
+            // frmMsg
             // 
-            this.deleteEmployeeToolStripMenuItem.Name = "deleteEmployeeToolStripMenuItem";
-            this.deleteEmployeeToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.deleteEmployeeToolStripMenuItem.Text = "Delete Employee";
+            this.frmMsg.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+            this.frmMsg.Caption = null;
+            this.frmMsg.Icon = Guna.UI2.WinForms.MessageDialogIcon.Warning;
+            this.frmMsg.Parent = this;
+            this.frmMsg.Style = Guna.UI2.WinForms.MessageDialogStyle.Dark;
+            this.frmMsg.Text = null;
             // 
             // frmMain
             // 
@@ -629,13 +663,13 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
             this.ClientSize = new System.Drawing.Size(1184, 761);
             this.Controls.Add(this.PnlBar);
-            this.Controls.Add(this.Tab);
+            this.Controls.Add(this.TabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Tab.ResumeLayout(false);
+            this.TabControl1.ResumeLayout(false);
             this.TabDataList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Main)).EndInit();
             this.MainMenu.ResumeLayout(false);
@@ -654,7 +688,7 @@
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2TabControl Tab;
+        private Guna.UI2.WinForms.Guna2TabControl TabControl1;
         private Guna.UI2.WinForms.Guna2Panel PnlBar;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
@@ -679,6 +713,8 @@
         private System.Windows.Forms.ToolStripMenuItem ssToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sssToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteEmployeeToolStripMenuItem;
+        private Guna.UI2.WinForms.Guna2Button btnRefresh;
+        private Guna.UI2.WinForms.Guna2MessageDialog frmMsg;
     }
 }
 
