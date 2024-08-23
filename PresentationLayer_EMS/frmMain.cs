@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -25,8 +26,8 @@ namespace PresentationLayer_EMS
             InitializeComponent();
             ContextMenuEffects();
 
-        }
 
+        }
         public void ContextMenuEffects()
         {
             MainMenu.BackColor = Color.FromArgb(45, 45, 48);
@@ -43,29 +44,30 @@ namespace PresentationLayer_EMS
         {
             TabPage CurrentlySelected = TabControl1.SelectedTab;
             lblTitle.Text = $"EMS~{CurrentlySelected.Text}";
-
-            switch (int.Parse(CurrentlySelected.Tag.ToString()))
+            int Cases = TabControl1.SelectedIndex;
+            switch ((Cases))
             {
+                case 0:
+
+                    ListAllEmployees();
+                    break;
                 case 1:
-                    if (PermissionsON(TabControl1.TabPages[0].Tag)) ListAllEmployees();
+                    ListAllDepartments();
+
                     break;
                 case 2:
-                    if (PermissionsON(TabControl1.TabPages[1].Tag)) ListAllDepartments();
-
+                    //Should Add Method
                     break;
+
+                case 3:
+                    //Should Add Method
+                    break;
+
                 case 4:
-                    //Should Add Method
-                    break;
-
-                case 8:
-                    //Should Add Method
-                    break;
-
-                case 16:
                     ListAllUsers();
                     break;
 
-                case 32:
+                case 5:
                     //Should Add Method
                     break;
 
@@ -107,12 +109,11 @@ namespace PresentationLayer_EMS
             // Departmenet Data List:
             Settings.DataGridViewStyles(DGV_Department);
             BindingSource bs = new BindingSource();
-            bs.DataSource = clsEmployeeList.GetEmployeeList();
+            bs.DataSource = clsDepartment.GetAllDepartments();
             DGV_Department.DataSource = bs;
-            DGV_Department.Columns.Add("id", "ID");
-            DGV_Department.Columns.Add("DepartmentName", "Department Name");
-            DGV_Department.Columns["ID"].Width = 30;
-            DGV_Department.Columns["DepartmentName"].Width = 500;
+            DGV_Department.Columns[0].Width = 100;
+            DGV_Department.Columns[1].Width = 400;
+            DGV_Department.Columns[2].Width = 200;
 
 
         }
@@ -176,14 +177,26 @@ namespace PresentationLayer_EMS
 
         }
 
-        private int ReturnINT(object tag) { return int.Parse(tag.ToString()); }
-        public bool PermissionsON(object Tag)
+        public bool PermissionsON(TabPage tab)
         {
-            
             if (frmLogin.currentPermissions == 0) return true;
-            if ((frmLogin.currentPermissions & ReturnINT(Tag)) == 1) return true;
-            return false;
+            if ((frmLogin.currentPermissions & int.Parse(tab.Tag.ToString())) != 0) return true;
 
+            return false;
+        }
+
+
+        private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (!PermissionsON(e.TabPage))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace PresentationLayer_EMS
 {
     public partial class frmLogin : Form
     {
-        public static int currentPermissions = 0;
+        public static int currentPermissions = -1;
         public frmLogin()
         {
             InitializeComponent();
@@ -37,6 +37,7 @@ namespace PresentationLayer_EMS
             currentPermissions = clsUsers.IsUserNameAndPasswordAreValid(tbUserName.Text, tbPassword.Text);
             if ( currentPermissions != -1)
             {
+                
                 frmMain frm1 = new frmMain();
                 this.Hide();
                 frm1.ShowDialog();
