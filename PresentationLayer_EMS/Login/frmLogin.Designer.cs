@@ -39,6 +39,7 @@
             this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tbUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.tbPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            this.AnimationEffect = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
             this.PnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).BeginInit();
@@ -199,11 +200,20 @@
             this.tbPassword.Location = new System.Drawing.Point(48, 316);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '\0';
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.PlaceholderText = "********";
             this.tbPassword.SelectedText = "";
             this.tbPassword.Size = new System.Drawing.Size(206, 32);
             this.tbPassword.TabIndex = 5;
+            // 
+            // AnimationEffect
+            // 
+            this.AnimationEffect.Location = new System.Drawing.Point(114, 414);
+            this.AnimationEffect.Name = "AnimationEffect";
+            this.AnimationEffect.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(186)))), ((int)(((byte)(188)))));
+            this.AnimationEffect.Size = new System.Drawing.Size(63, 55);
+            this.AnimationEffect.TabIndex = 12;
+            this.AnimationEffect.Visible = false;
             // 
             // frmLogin
             // 
@@ -211,6 +221,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
             this.ClientSize = new System.Drawing.Size(297, 471);
+            this.Controls.Add(this.AnimationEffect);
             this.Controls.Add(this.guna2CirclePictureBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnLogin);
@@ -246,5 +257,6 @@
         private Guna.UI2.WinForms.Guna2Button btnLogin;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox2;
+        private Guna.UI2.WinForms.Guna2WinProgressIndicator AnimationEffect;
     }
 }

@@ -172,7 +172,7 @@ namespace PresentationLayer_EMS
             if (result == DialogResult.Yes)
             {
                 if (!clsEmployeeList.DeleteEmployee(ID)) MessageBox.Show("Error!");
-                clsEmployeeList.GetEmployeeList();
+                DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
             }
 
         }
@@ -196,6 +196,7 @@ namespace PresentationLayer_EMS
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            DGV_Main.DataSource = null;
             DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
         }
     }

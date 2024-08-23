@@ -32,16 +32,31 @@ namespace PresentationLayer_EMS
             }
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
+            AnimationEffect.Start();
+            AnimationEffect.Visible = true;
+
+            int LoginAsynchonous = await Task.Run(() => currentPermissions = clsUsers.IsUserNameAndPasswordAreValid(tbUserName.Text, tbPassword.Text));
+            btnLogin.Enabled = false;
             currentPermissions = clsUsers.IsUserNameAndPasswordAreValid(tbUserName.Text, tbPassword.Text);
+
             if ( currentPermissions != -1)
             {
-                
+
                 frmMain frm1 = new frmMain();
                 this.Hide();
+                frm1.FormClosed += (s, args) => this.Show();
+                tbUserName.Text = "";
+                tbPassword.Text = "";
                 frm1.ShowDialog();
+
             }
+            
+            AnimationEffect.Stop();
+            AnimationEffect.Visible = false;
+            btnLogin.Enabled = true;
         }
+
     }
 }
