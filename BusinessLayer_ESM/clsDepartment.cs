@@ -24,6 +24,11 @@ namespace BusinessLayer_ESM
         {
             return clsDepartmentData.GetAllDepartments();
         }
+        
+        public static DataTable GetAllDepartmentName()
+        {
 
+        return clsDepartmentData.GetAllDepartmentName();
+        }
     }
 }

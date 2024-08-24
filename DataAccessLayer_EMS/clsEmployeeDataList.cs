@@ -57,10 +57,10 @@ namespace DataAccessLayer_EMS
             return false;
         }
 
-        public static bool AddNewEmployee(string FirstName, string LastName, string Email, string Phone, DateTime HireDate, string ExtraNotes , int DepartmentID)
+        public static bool AddNewEmployee(string FirstName, string LastName, string Email, string Phone, DateTime HireDate, string ExtraNotes, int DepartmentID)
         {
-
-            string query = @"INSERT INTO Employee (FirstName,LastName,Email,Phone,HireDate,ExtraNotes,DepartmentID) VALUES (@FirstName,@LastName,@Email,@Phone,@HireDate,ExtraNotes,@DepartmentID)";
+            string query = @"INSERT INTO Employee (FirstName,LastName,Email,Phone,HireDate,ExtraNotes,DepartmentID) 
+                     VALUES (@FirstName,@LastName,@Email,@Phone,@HireDate,@ExtraNotes,@DepartmentID)";
 
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
@@ -74,8 +74,8 @@ namespace DataAccessLayer_EMS
                     command.Parameters.AddWithValue("@HireDate", HireDate);
                     command.Parameters.AddWithValue("@ExtraNotes", ExtraNotes);
                     command.Parameters.AddWithValue("@DepartmentID", DepartmentID);
-                    object RowEffected = command.ExecuteScalar();
-                    if (RowEffected != DBNull.Value) return true;
+                    object RowEffected = command.ExecuteNonQuery();
+                    if (RowEffected != null) return true;
                 }
 
 

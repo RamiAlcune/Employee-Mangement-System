@@ -42,7 +42,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnAddNewEmployee = new Guna.UI2.WinForms.Guna2Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbDepartmentID = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cbDepartmentID = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.msgBox = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.SuspendLayout();
             // 
             // tbFirstName
@@ -60,6 +61,7 @@
             this.tbFirstName.ForeColor = System.Drawing.Color.White;
             this.tbFirstName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbFirstName.Location = new System.Drawing.Point(81, 41);
+            this.tbFirstName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.PasswordChar = '\0';
             this.tbFirstName.PlaceholderText = "";
@@ -82,6 +84,7 @@
             this.tbLastName.ForeColor = System.Drawing.Color.White;
             this.tbLastName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbLastName.Location = new System.Drawing.Point(305, 41);
+            this.tbLastName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.PasswordChar = '\0';
             this.tbLastName.PlaceholderText = "";
@@ -104,6 +107,7 @@
             this.tbEmail.ForeColor = System.Drawing.Color.White;
             this.tbEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbEmail.Location = new System.Drawing.Point(81, 109);
+            this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.PasswordChar = '\0';
             this.tbEmail.PlaceholderText = "";
@@ -126,6 +130,7 @@
             this.tbPhoneNumber.ForeColor = System.Drawing.Color.White;
             this.tbPhoneNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbPhoneNumber.Location = new System.Drawing.Point(305, 109);
+            this.tbPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.PasswordChar = '\0';
             this.tbPhoneNumber.PlaceholderText = "";
@@ -269,28 +274,37 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Department";
             // 
-            // tbDepartmentID
+            // cbDepartmentID
             // 
-            this.tbDepartmentID.BackColor = System.Drawing.Color.Transparent;
-            this.tbDepartmentID.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.tbDepartmentID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tbDepartmentID.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.tbDepartmentID.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbDepartmentID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbDepartmentID.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.tbDepartmentID.ForeColor = System.Drawing.Color.White;
-            this.tbDepartmentID.ItemHeight = 30;
-            this.tbDepartmentID.Location = new System.Drawing.Point(305, 170);
-            this.tbDepartmentID.Name = "tbDepartmentID";
-            this.tbDepartmentID.Size = new System.Drawing.Size(192, 36);
-            this.tbDepartmentID.TabIndex = 16;
+            this.cbDepartmentID.BackColor = System.Drawing.Color.Transparent;
+            this.cbDepartmentID.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbDepartmentID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDepartmentID.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.cbDepartmentID.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbDepartmentID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbDepartmentID.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.cbDepartmentID.ForeColor = System.Drawing.Color.White;
+            this.cbDepartmentID.ItemHeight = 30;
+            this.cbDepartmentID.Location = new System.Drawing.Point(305, 170);
+            this.cbDepartmentID.Name = "cbDepartmentID";
+            this.cbDepartmentID.Size = new System.Drawing.Size(275, 36);
+            this.cbDepartmentID.TabIndex = 16;
+            // 
+            // msgBox
+            // 
+            this.msgBox.Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK;
+            this.msgBox.Caption = null;
+            this.msgBox.Icon = Guna.UI2.WinForms.MessageDialogIcon.None;
+            this.msgBox.Parent = null;
+            this.msgBox.Style = Guna.UI2.WinForms.MessageDialogStyle.Dark;
+            this.msgBox.Text = null;
             // 
             // ctrlEmployeeDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
-            this.Controls.Add(this.tbDepartmentID);
+            this.Controls.Add(this.cbDepartmentID);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnAddNewEmployee);
             this.Controls.Add(this.label6);
@@ -328,6 +342,7 @@
         private System.Windows.Forms.Label label6;
         private Guna.UI2.WinForms.Guna2Button btnAddNewEmployee;
         private System.Windows.Forms.Label label7;
-        private Guna.UI2.WinForms.Guna2ComboBox tbDepartmentID;
+        private Guna.UI2.WinForms.Guna2ComboBox cbDepartmentID;
+        private Guna.UI2.WinForms.Guna2MessageDialog msgBox;
     }
 }

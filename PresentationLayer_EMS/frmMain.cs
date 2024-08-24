@@ -68,7 +68,7 @@ namespace PresentationLayer_EMS
                     break;
 
                 case 5:
-                    //Should Add Method
+                    ListAllLogs();
                     break;
 
 
@@ -136,7 +136,15 @@ namespace PresentationLayer_EMS
         public void ListAllLogs()
         {
             Settings.DataGridViewStyles(DGV_Logs);
-
+            BindingSource bs = new BindingSource();
+            bs.DataSource = clsLogs.GetAllLogs();
+            DGV_Logs.DataSource = bs;
+            DGV_Logs.Columns[0].HeaderText = "User Name";
+            DGV_Logs.Columns[0].Width = 60;
+            DGV_Logs.Columns[1].HeaderText = "Date Of Action";
+            DGV_Logs.Columns[1].Width = 60;
+            DGV_Logs.Columns[2].HeaderText = "Action";
+            DGV_Logs.Columns[2].Width = 300;
         }
 
         private void PnlBar_MouseDown(object sender, MouseEventArgs e)

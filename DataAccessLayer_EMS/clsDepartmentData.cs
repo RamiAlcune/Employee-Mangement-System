@@ -69,5 +69,27 @@ ORDER BY
             }
             return false;
         }
+
+       public static DataTable GetAllDepartmentName()
+        {
+            string query = @"SELECT Department.DepartmentID,Department.DepartmentName From Department";
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows) dt.Load(reader);
+
+
+
+                }
+
+            }
+            return dt;
+        }
     }
-}
+
+    }
