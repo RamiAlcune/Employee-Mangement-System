@@ -40,5 +40,34 @@ ORDER BY
             }
             return dt;
         }
+
+        public static void UpdateDepartment(ref int DepartmentID,ref int DepartmentName)
+        {
+            string query = @"INSERT INTO Employee (FirstName,LastName,Email,Phone,HireDate,DepartmentID) VALUES (@FirstName,@LastName,@Email,@Phone,@HireDate,@DepartmentID)";
+
+        }
+
+        public static bool AddNewEmployee(int DepartmentName)
+        {
+            int rowAffected = 0;
+            string query = @"INSERT INTO Employee (DepartmentName) VALUES (@DepartmentName)";
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@DepartmentName", DepartmentName);
+                    connection.Open();
+                    rowAffected = command.ExecuteNonQuery();
+
+                    if (rowAffected > 0) {
+                        return true;
+                    }
+
+                }
+            }
+            return false;
+        }
     }
 }

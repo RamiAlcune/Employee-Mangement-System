@@ -52,6 +52,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Employee\frmAddNewEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\frmAddNewEmployee.Designer.cs">
+      <DependentUpon>frmAddNewEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\Controls\ctrlEmployeeDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Employee\Controls\ctrlEmployeeDetails.Designer.cs">
+      <DependentUpon>ctrlEmployeeDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +79,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="Employee\frmAddNewEmployee.resx">
+      <DependentUpon>frmAddNewEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\Controls\ctrlEmployeeDetails.resx">
+      <DependentUpon>ctrlEmployeeDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>

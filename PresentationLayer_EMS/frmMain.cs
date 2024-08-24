@@ -168,7 +168,7 @@ namespace PresentationLayer_EMS
         private void deleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int ID = (int)DGV_Main.CurrentRow.Cells[0].Value;
-            DialogResult result = frmMsg.Show($"Are You Sure You Want To Delete User");
+            DialogResult result = frmMsg.Show($"Are You Sure You Want To Delete User Number:[{ID}]?");
             if (result == DialogResult.Yes)
             {
                 if (!clsEmployeeList.DeleteEmployee(ID)) MessageBox.Show("Error!");
@@ -198,6 +198,34 @@ namespace PresentationLayer_EMS
         {
             DGV_Main.DataSource = null;
             DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void ssToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddNewEmployee frm2 = new frmAddNewEmployee();
+            frm2.ShowDialog();
+        }
+
+        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            int ID = (int)DGV_Main.CurrentRow.Cells[0].Value;
+            DialogResult result = frmMsg.Show($"Are You Sure You Want To Delete User Number:[{ID}]?");
+            if (result == DialogResult.Yes)
+            {
+                if (!clsEmployeeList.DeleteEmployee(ID)) MessageBox.Show("Error!");
+                DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
+            }
+
+        }
+
+        private void btnAddNewEmployee_Click(object sender, EventArgs e)
+        {
+            frmAddNewEmployee frm2 = new frmAddNewEmployee();
+            frm2.ShowDialog();
         }
     }
 }

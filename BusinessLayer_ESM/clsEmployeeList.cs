@@ -27,5 +27,12 @@ namespace BusinessLayer_ESM
                 return false;
             }
         }
+
+        public static bool AddNewEmployee(string FirstName, string LastName, string Email, string Phone, DateTime HireDate, string ExtraNotes,int DepartmenetID)
+        {
+            if (clsEmployeeDataList.AddNewEmployee(FirstName, LastName, Email, Phone, HireDate, ExtraNotes, DepartmenetID)) return true;
+
+            return false;
+        }
     }
 }
