@@ -136,16 +136,24 @@ namespace PresentationLayer_EMS
         }
         public void ListAllLogs()
         {
-            Settings.DataGridViewStyles(DGV_Logs);
             BindingSource bs = new BindingSource();
             bs.DataSource = clsLogs.GetAllLogs();
+            if (bs.Count > 0) { 
+            Settings.DataGridViewStyles(DGV_Logs);
             DGV_Logs.DataSource = bs;
             DGV_Logs.Columns[0].HeaderText = "User Name";
-            DGV_Logs.Columns[0].Width = 60;
+            DGV_Logs.Columns[0].Width = 40;
             DGV_Logs.Columns[1].HeaderText = "Date Of Action";
-            DGV_Logs.Columns[1].Width = 60;
+            DGV_Logs.Columns[1].Width = 40;
             DGV_Logs.Columns[2].HeaderText = "Action";
-            DGV_Logs.Columns[2].Width = 500;
+            DGV_Logs.Columns[2].Width = 550;
+        }
+            else
+            {
+                frmMsg.Icon = MessageDialogIcon.Warning;
+                frmMsg.Caption = "Logs are Empty.";
+                frmMsg.Text = "there is not any rows to show.";
+            }
         }
 
         private void PnlBar_MouseDown(object sender, MouseEventArgs e)
@@ -231,9 +239,17 @@ namespace PresentationLayer_EMS
             DialogResult result = frmMsg.Show($"Are You Sure You Want To Delete User Number:[{ID}]?");
             if (result == DialogResult.Yes)
             {
-                if (!clsEmployeeList.DeleteEmployee(ID)) MessageBox.Show("Error!"); clsLogs.NewActionSaved("Employee Table", "Fail To Delete", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
-                DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
-                clsLogs.NewActionSaved("Employee", $"Delete [{ID}]", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
+                if (!clsEmployeeList.DeleteEmployee(ID)) {
+                    MessageBox.Show("Error!");
+                    clsLogs.NewActionSaved("Employee Table", "Fail To Delete", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
+                }
+                else
+                {
+                    DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
+                    clsLogs.NewActionSaved("Employee", $"Delete [{ID}]", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
+
+                }
+
             }
 
         }

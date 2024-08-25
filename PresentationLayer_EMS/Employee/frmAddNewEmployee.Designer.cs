@@ -39,6 +39,7 @@
             this.ctrlEmployeeDetails1.Name = "ctrlEmployeeDetails1";
             this.ctrlEmployeeDetails1.Size = new System.Drawing.Size(609, 570);
             this.ctrlEmployeeDetails1.TabIndex = 0;
+            this.ctrlEmployeeDetails1.ClosedEvent += new System.EventHandler(this.ctrlEmployeeDetails1_ClosedEvent);
             // 
             // frmAddNewEmployee
             // 

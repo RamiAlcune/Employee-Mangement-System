@@ -15,6 +15,14 @@ namespace PresentationLayer_EMS
         public frmAddNewEmployee()
         {
             InitializeComponent();
+            ctrlEmployeeDetails1.ClosedEvent += ctrlEmployeeDetails1_ClosedEvent;
+
+
+        }
+
+        private void ctrlEmployeeDetails1_ClosedEvent(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

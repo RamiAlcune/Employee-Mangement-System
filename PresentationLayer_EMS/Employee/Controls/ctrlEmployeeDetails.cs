@@ -15,12 +15,13 @@ namespace PresentationLayer_EMS.Employee
 
     public partial class ctrlEmployeeDetails : UserControl
     {
-        
+
+        public event EventHandler ClosedEvent;
+
         public ctrlEmployeeDetails()
         {
             InitializeComponent();
             ImplementComboBoxDepartment();
-            
         }
 
         private void ImplementComboBoxDepartment()
@@ -33,10 +34,12 @@ namespace PresentationLayer_EMS.Employee
         }
         private async void btnAddNewEmployee_Click(object sender, EventArgs e)
         {
+            
+
             if (clsEmployeeList.AddNewEmployee(tbFirstName.Text, tbLastName.Text, tbEmail.Text, tbPhoneNumber.Text, tpHireDate.Value, tbExtraNotes.Text, int.Parse(cbDepartmentID.SelectedIndex.ToString()) + 1)) {
                 MessageBox.Show($"Has been added to DataBase: [{tbFirstName.Text} {tbLastName.Text}]", msgBox.Caption = $"Message From DataBase", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await Task.Run(() => clsLogs.NewActionSaved("Employee", $"Added New Employee", DateTime.Now, frmLogin.UserNameIdFromFrmLogin));
-                
+                ClosedEvent?.Invoke(this, e);
             } 
         else
             {

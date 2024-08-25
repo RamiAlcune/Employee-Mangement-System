@@ -35,7 +35,7 @@ namespace DataAccessLayer_EMS
 
         public static void NewActionSaved(string TabName,string TypeOfAction,DateTime DateOfAction,int IDUsers)
         {
-            string Action = $"| {TabName} | {TypeOfAction} | Date: {DateOfAction}";
+            string Action = $"{TabName} | {TypeOfAction} | Date: {DateOfAction}";
             string query = @"INSERT INTO Logs (DateOfAction, Action, IDUsers) 
                      VALUES (@DateOfAction, @Action, @IDUsers)";
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
