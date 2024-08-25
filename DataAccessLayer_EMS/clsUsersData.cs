@@ -33,26 +33,6 @@ namespace DataAccessLayer_EMS
             return dt;
         }
 
-        public static void GetUserPermission(int ID)
-        {
-            string query = @"SELECT Permissions from ";
-            DataTable dt = new DataTable();
-            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-            {
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows) dt.Load(reader);
-
-
-
-                }
-
-            }
-        }
-
         public static int IsUserNameAndPasswordAreValid(string UserName,string Password)
         {
             string query = @"SELECT UserName,Password,Permissions FROM Users INNER JOIN UserRoles ON UserRoles.IDUserRoles = Users.IDUserRoles WHERE @UserName = UserName AND @Password = Password";
@@ -83,6 +63,30 @@ namespace DataAccessLayer_EMS
                 }
 
             }
+        }
+        public static int GetUserNameIdFromUserName(string UserName) {
+
+            string query = @"SELECT IDUsers from Users WHERE @UserName = UserName";
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserName", UserName);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        return int.Parse(reader["IDUsers"].ToString());
+                    }
+
+
+
+
+                }
+
+            }
+            return -1;
         }
     }
 }

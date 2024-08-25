@@ -15,5 +15,16 @@ namespace BusinessLayer_ESM
 
         return clsLogsUsers.GetAllLogs();
         }
+
+        public static void NewActionSaved(string TabName, string TypeOfAction, DateTime DateOfAction, int IDUsers)
+        {
+            clsLogsUsers.NewActionSaved(TabName, TypeOfAction, DateOfAction, IDUsers);
+        }
+
+        public static void ClearAllLogs()
+        {
+            clsLogsUsers.ClearAllLogs();
+        }
+
     }
 }

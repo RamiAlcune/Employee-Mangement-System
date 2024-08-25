@@ -19,7 +19,7 @@ namespace PresentationLayer_EMS
         {
             InitializeComponent();
         }
-
+        public static int UserNameIdFromFrmLogin = -1;
         private void PnlLogin_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left || e.Button == MouseButtons.Right)
@@ -40,6 +40,8 @@ namespace PresentationLayer_EMS
             int LoginAsynchonous = await Task.Run(() => currentPermissions = clsUsers.IsUserNameAndPasswordAreValid(tbUserName.Text, tbPassword.Text));
             btnLogin.Enabled = false;
             currentPermissions = clsUsers.IsUserNameAndPasswordAreValid(tbUserName.Text, tbPassword.Text);
+            UserNameIdFromFrmLogin = clsUsers.GetUserNameIdFromUserName(tbUserName.Text);
+
 
             if ( currentPermissions != -1)
             {

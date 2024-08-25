@@ -17,9 +17,10 @@ using System.Windows.Forms;
 
 namespace PresentationLayer_EMS
 {
-
+ 
     public partial class frmMain : Form
     {
+        
         private static DataTable _EmployeesList = clsEmployeeList.GetEmployeeList();
         public frmMain()
         {
@@ -144,7 +145,7 @@ namespace PresentationLayer_EMS
             DGV_Logs.Columns[1].HeaderText = "Date Of Action";
             DGV_Logs.Columns[1].Width = 60;
             DGV_Logs.Columns[2].HeaderText = "Action";
-            DGV_Logs.Columns[2].Width = 300;
+            DGV_Logs.Columns[2].Width = 500;
         }
 
         private void PnlBar_MouseDown(object sender, MouseEventArgs e)
@@ -157,21 +158,25 @@ namespace PresentationLayer_EMS
         }
 
 
+        private void tbLogsSearchingByUserName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            (DGV_Logs.DataSource as BindingSource).Filter = $"UserName LIKE '%{tbLogsSearchingByUserName.Text.ToLower()}%'";
+        }
 
+        private void tbMainSearchingByName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            (DGV_Main.DataSource as BindingSource).Filter = $"FirstName LIKE '%{tbMainSearchingByName.Text.ToLower()}%'";
+        }
+
+        private void tbSearchByRole_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            (DGV_Users.DataSource as BindingSource).Filter = $"Roles LIKE '%{tbSearchByRole.Text.ToLower()}%'";
+        }
         private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             (DGV_Department.DataSource as BindingSource).Filter = $"DepartmentName LIKE '%{tbDepartmentSearch.Text.ToLower()}%'";
         }
 
-        private void tbMainSearchingByName_KeyUp(object sender, KeyEventArgs e)
-        {
-            (DGV_Main.DataSource as BindingSource).Filter = $"FirstName LIKE '%{tbMainSearchingByName.Text.ToLower()}%'";
-        }
-
-        private void tbSearchByRole_KeyUp(object sender, KeyEventArgs e)
-        {
-            (DGV_Users.DataSource as BindingSource).Filter = $"Roles LIKE '%{tbSearchByRole.Text.ToLower()}%'";
-        }
 
         private void deleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -181,6 +186,8 @@ namespace PresentationLayer_EMS
             {
                 if (!clsEmployeeList.DeleteEmployee(ID)) MessageBox.Show("Error!");
                 DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
+                clsLogs.NewActionSaved("Employee", $"Delete [{ID}]", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
+
             }
 
         }
@@ -224,8 +231,9 @@ namespace PresentationLayer_EMS
             DialogResult result = frmMsg.Show($"Are You Sure You Want To Delete User Number:[{ID}]?");
             if (result == DialogResult.Yes)
             {
-                if (!clsEmployeeList.DeleteEmployee(ID)) MessageBox.Show("Error!");
+                if (!clsEmployeeList.DeleteEmployee(ID)) MessageBox.Show("Error!"); clsLogs.NewActionSaved("Employee Table", "Fail To Delete", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
                 DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
+                clsLogs.NewActionSaved("Employee", $"Delete [{ID}]", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
             }
 
         }
@@ -234,6 +242,13 @@ namespace PresentationLayer_EMS
         {
             frmAddNewEmployee frm2 = new frmAddNewEmployee();
             frm2.ShowDialog();
+        }
+
+        private void btnClearAllLogs_Click(object sender, EventArgs e)
+        {
+            clsLogs.ClearAllLogs();
+            DGV_Logs.DataSource = null;
+            DGV_Logs.DataSource = clsLogs.GetAllLogs();
         }
     }
 }

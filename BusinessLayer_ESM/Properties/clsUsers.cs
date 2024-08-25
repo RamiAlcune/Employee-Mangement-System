@@ -19,5 +19,11 @@ namespace BusinessLayer_ESM.Properties
         {
             return clsUsersData.IsUserNameAndPasswordAreValid(UserName,Password);
         }
+
+        public static int GetUserNameIdFromUserName(string UserName)
+        {
+            return clsUsersData.GetUserNameIdFromUserName(UserName);
+
+        }
     }
 }

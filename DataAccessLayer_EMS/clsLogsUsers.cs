@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Policy;
 
 namespace DataAccessLayer_EMS
 {
@@ -29,6 +30,45 @@ namespace DataAccessLayer_EMS
 
             }
             return dt;
+        }
+
+
+        public static void NewActionSaved(string TabName,string TypeOfAction,DateTime DateOfAction,int IDUsers)
+        {
+            string Action = $"| {TabName} | {TypeOfAction} | Date: {DateOfAction}";
+            string query = @"INSERT INTO Logs (DateOfAction, Action, IDUsers) 
+                     VALUES (@DateOfAction, @Action, @IDUsers)";
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@DateOfAction", DateOfAction);
+                    command.Parameters.AddWithValue("@Action", Action);
+                    command.Parameters.AddWithValue("@IDUsers", IDUsers);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                }
+
+            }
+        }
+
+        public static void ClearAllLogs()
+        {
+            string query = @"TRUNCATE TABLE Logs;
+";
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                }
+
+            }
         }
     }
 }
