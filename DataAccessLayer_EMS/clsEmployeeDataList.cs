@@ -5,29 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+
 namespace DataAccessLayer_EMS
 {
     public class clsEmployeeDataList
     {
-
-
         public static DataTable GetAllEmployees()
         {
             string query = @"SELECT EmployeeID,FirstName,LastName,Email,Phone,HireDate,DepartmentName FROM Employee INNER join Department ON Department.DepartmentID = Employee.DepartmentID";
             DataTable dt = new DataTable();
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                try
                 {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows) dt.Load(reader);
-
-
-
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.HasRows) dt.Load(reader);
+                    }
                 }
-
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"SQL Error: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
             }
             return dt;
         }
@@ -38,22 +43,28 @@ namespace DataAccessLayer_EMS
             string query = @"DELETE FROM dbo.Employee WHERE EmployeeID = @ID";
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                try
                 {
-                    command.Parameters.AddWithValue("@ID", ID);
-                    connection.Open();
-
-                    rowaffected = command.ExecuteNonQuery();
-                    if (rowaffected > 0)
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        return true;
+                        command.Parameters.AddWithValue("@ID", ID);
+                        connection.Open();
+                        rowaffected = command.ExecuteNonQuery();
+                        if (rowaffected > 0)
+                        {
+                            return true;
+                        }
                     }
-
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"SQL Error: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
                 }
             }
-
-
             return false;
         }
 
@@ -64,24 +75,32 @@ namespace DataAccessLayer_EMS
 
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand(query, connection))
+                try
                 {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@FirstName", FirstName);
-                    command.Parameters.AddWithValue("@LastName", LastName);
-                    command.Parameters.AddWithValue("@Email", Email);
-                    command.Parameters.AddWithValue("@Phone", Phone);
-                    command.Parameters.AddWithValue("@HireDate", HireDate);
-                    command.Parameters.AddWithValue("@ExtraNotes", ExtraNotes);
-                    command.Parameters.AddWithValue("@DepartmentID", DepartmentID);
-                    object RowEffected = command.ExecuteNonQuery();
-                    if (RowEffected != null) return true;
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@FirstName", FirstName);
+                        command.Parameters.AddWithValue("@LastName", LastName);
+                        command.Parameters.AddWithValue("@Email", Email);
+                        command.Parameters.AddWithValue("@Phone", Phone);
+                        command.Parameters.AddWithValue("@HireDate", HireDate);
+                        command.Parameters.AddWithValue("@ExtraNotes", ExtraNotes);
+                        command.Parameters.AddWithValue("@DepartmentID", DepartmentID);
+                        object RowEffected = command.ExecuteNonQuery();
+                        if (RowEffected != null) return true;
+                    }
                 }
-
-
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"SQL Error: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
             }
             return false;
         }
-
     }
 }
