@@ -64,6 +64,18 @@
     <Compile Include="Employee\Controls\ctrlEmployeeDetails.Designer.cs">
       <DependentUpon>ctrlEmployeeDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Employee\frmExtraNotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\frmExtraNotes.Designer.cs">
+      <DependentUpon>frmExtraNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\frmShowEmployeeCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\frmShowEmployeeCard.Designer.cs">
+      <DependentUpon>frmShowEmployeeCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +96,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Employee\Controls\ctrlEmployeeDetails.resx">
       <DependentUpon>ctrlEmployeeDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\frmExtraNotes.resx">
+      <DependentUpon>frmExtraNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\frmShowEmployeeCard.resx">
+      <DependentUpon>frmShowEmployeeCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -135,6 +153,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LoginUI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Female.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Male.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EmailICON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtraNotesICON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HireDateICON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PhoneICON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NameICON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LocationICON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtraNotesICON1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

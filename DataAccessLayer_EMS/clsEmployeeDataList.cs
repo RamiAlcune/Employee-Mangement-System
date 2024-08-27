@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 
 namespace DataAccessLayer_EMS
 {
@@ -12,7 +13,21 @@ namespace DataAccessLayer_EMS
     {
         public static DataTable GetAllEmployees()
         {
-            string query = @"SELECT EmployeeID,FirstName,LastName,Email,Phone,HireDate,DepartmentName FROM Employee INNER join Department ON Department.DepartmentID = Employee.DepartmentID";
+            string query = @"
+select Employee.EmployeeID,FirstName,LastName,CASE
+WHEN Employee.Gender = 0 THEN 'Male'
+WHEN Employee.Gender = 1 THEN 'Female'
+END AS Gender,
+    Contact.Phone,
+    Department.DepartmentName,
+    Position.PositionName
+	From Employee
+INNER JOIN  Department ON Department.DepartmentID = Employee.DepartmentID 
+INNER JOIN Contact ON Contact.EmployeeID = Employee.EmployeeID
+INNER JOIN Position ON Position.PositionID = Employee.PositionID
+";
+
+
             DataTable dt = new DataTable();
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
@@ -68,10 +83,14 @@ namespace DataAccessLayer_EMS
             return false;
         }
 
-        public static bool AddNewEmployee(string FirstName, string LastName, string Email, string Phone, DateTime HireDate, string ExtraNotes, int DepartmentID)
+        public static bool AddNewEmployee(string FirstName, string LastName,DateTime HireDate, string ExtraNotes, int DepartmentID, string Email, string Phone,string Location)
         {
+            int EmployeeID = -1;
             string query = @"INSERT INTO Employee (FirstName,LastName,Email,Phone,HireDate,ExtraNotes,DepartmentID) 
-                     VALUES (@FirstName,@LastName,@Email,@Phone,@HireDate,@ExtraNotes,@DepartmentID)";
+                     VALUES (@FirstName,@LastName,@Email,@Phone,@HireDate,@ExtraNotes,@DepartmentID);" + "SELECT SCOPE_IDENTITY();";
+
+            string query2 = @"INSERT INTO Contact (EmployeeID, Phone, Email, Location) " +
+                      "VALUES (@EmployeeID, @Phone, @Email, @Location);";
 
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
@@ -87,8 +106,17 @@ namespace DataAccessLayer_EMS
                         command.Parameters.AddWithValue("@HireDate", HireDate);
                         command.Parameters.AddWithValue("@ExtraNotes", ExtraNotes);
                         command.Parameters.AddWithValue("@DepartmentID", DepartmentID);
-                        object RowEffected = command.ExecuteNonQuery();
-                        if (RowEffected != null) return true;
+                        EmployeeID = Convert.ToInt32(command.ExecuteScalar());
+                        connection.Close();
+                    }
+                    using (SqlCommand command = new SqlCommand(query2, connection))
+                    {
+                        command.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+                        command.Parameters.AddWithValue("@Phone", Phone);
+                        command.Parameters.AddWithValue("@Email", Email);
+                        command.Parameters.AddWithValue("@Location", Location);
+                        connection.Open();
+                        command.ExecuteNonQuery();
                     }
                 }
                 catch (SqlException ex)
@@ -101,6 +129,46 @@ namespace DataAccessLayer_EMS
                 }
             }
             return false;
+        }
+
+        public static DataTable GetEmployeeCardByID(int ID)
+        {
+            string query = @"
+select FirstName,LastName,
+    Contact.Phone,
+    Contact.Email,
+    Contact.Location,
+    Employee.ExtraNotes,
+    Employee.Gender
+	From Employee
+INNER JOIN  Department ON Department.DepartmentID = Employee.DepartmentID 
+INNER JOIN Contact ON Contact.EmployeeID = Employee.EmployeeID
+INNER JOIN Position ON Position.PositionID = Employee.PositionID
+";
+
+
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.HasRows) dt.Load(reader);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"SQL Error: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+            }
+            return dt;
         }
     }
 }

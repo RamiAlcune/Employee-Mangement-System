@@ -21,12 +21,13 @@ namespace PresentationLayer_EMS.Employee
         public ctrlEmployeeDetails()
         {
             InitializeComponent();
-            ImplementComboBoxDepartment();
+            ImplementComboBox();
         }
 
-        private void ImplementComboBoxDepartment()
+        private void ImplementComboBox()
         {
-            
+
+            // Department
             cbDepartmentID.DataSource = clsDepartment.GetAllDepartmentName();
             cbDepartmentID.DisplayMember = "DepartmentName";
             cbDepartmentID.ValueMember = "DepartmentID";
@@ -37,6 +38,7 @@ namespace PresentationLayer_EMS.Employee
             
 
             if (clsEmployeeList.AddNewEmployee(tbFirstName.Text, tbLastName.Text, tbEmail.Text, tbPhoneNumber.Text, tpHireDate.Value, tbExtraNotes.Text, int.Parse(cbDepartmentID.SelectedIndex.ToString()) + 1)) {
+                // Tommorow i should implement the new Parameters
                 MessageBox.Show($"Has been added to DataBase: [{tbFirstName.Text} {tbLastName.Text}]", msgBox.Caption = $"Message From DataBase", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await Task.Run(() => clsLogs.NewActionSaved("Employee", $"Added New Employee", DateTime.Now, frmLogin.UserNameIdFromFrmLogin));
                 ClosedEvent?.Invoke(this, e);

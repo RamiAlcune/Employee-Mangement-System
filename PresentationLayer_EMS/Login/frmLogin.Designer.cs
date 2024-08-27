@@ -129,7 +129,7 @@
             this.btnLogin.Location = new System.Drawing.Point(3, 373);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(294, 35);
-            this.btnLogin.TabIndex = 9;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseTransparentBackground = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -179,7 +179,7 @@
             this.tbUserName.PlaceholderText = "Admin";
             this.tbUserName.SelectedText = "";
             this.tbUserName.Size = new System.Drawing.Size(206, 32);
-            this.tbUserName.TabIndex = 8;
+            this.tbUserName.TabIndex = 0;
             // 
             // tbPassword
             // 
@@ -204,7 +204,7 @@
             this.tbPassword.PlaceholderText = "********";
             this.tbPassword.SelectedText = "";
             this.tbPassword.Size = new System.Drawing.Size(206, 32);
-            this.tbPassword.TabIndex = 5;
+            this.tbPassword.TabIndex = 1;
             // 
             // AnimationEffect
             // 
@@ -213,6 +213,7 @@
             this.AnimationEffect.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(186)))), ((int)(((byte)(188)))));
             this.AnimationEffect.Size = new System.Drawing.Size(63, 55);
             this.AnimationEffect.TabIndex = 12;
+            this.AnimationEffect.TabStop = false;
             this.AnimationEffect.Visible = false;
             // 
             // frmLogin

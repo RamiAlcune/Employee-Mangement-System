@@ -1,6 +1,7 @@
 ﻿using BusinessLayer_ESM;
 using BusinessLayer_ESM.Properties;
 using Guna.UI2.WinForms;
+using PresentationLayer_EMS.Employee;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -82,28 +83,36 @@ namespace PresentationLayer_EMS
             ListAllEmployees();
         }
 
-
-        public void ListAllEmployees()
+    public void ListAllEmployees()
         {
             Settings.DataGridViewStyles(DGV_Main);
             BindingSource bs = new BindingSource();
             bs.DataSource = clsEmployeeList.GetEmployeeList();
-            DGV_Main.DataSource = bs;
-            //Employee Data List:
-            DGV_Main.Columns[0].HeaderText = "ID";
-            DGV_Main.Columns[0].Width = 35;
-            DGV_Main.Columns[1].HeaderText = "First Name";
-            DGV_Main.Columns[1].Width = 100;
-            DGV_Main.Columns[2].HeaderText = "Last Name";
-            DGV_Main.Columns[2].Width = 100;
-            DGV_Main.Columns[3].HeaderText = "Email";
-            DGV_Main.Columns[3].Width = 150;
-            DGV_Main.Columns[4].HeaderText = "Phone";
-            DGV_Main.Columns[4].Width = 100;
-            DGV_Main.Columns[5].HeaderText = "Hire Date";
-            DGV_Main.Columns[5].Width = 100;
-            DGV_Main.Columns[6].HeaderText = "Department Name";
-            DGV_Main.Columns[6].Width = 200;
+            if (bs.Count > 0)
+            {
+                DGV_Main.DataSource = bs;
+                //Employee Data List:
+                DGV_Main.Columns[0].HeaderText = "ID";
+                DGV_Main.Columns[0].Width = 35;
+                DGV_Main.Columns[1].HeaderText = "First Name";
+                DGV_Main.Columns[1].Width = 60;
+                DGV_Main.Columns[2].HeaderText = "Last Name";
+                DGV_Main.Columns[2].Width = 60;
+                DGV_Main.Columns[3].HeaderText = "Gender";
+                DGV_Main.Columns[3].Width = 60;
+                DGV_Main.Columns[4].HeaderText = "Phone";
+                DGV_Main.Columns[4].Width = 100;
+                DGV_Main.Columns[5].HeaderText = "Department Name";
+                DGV_Main.Columns[5].Width = 150;
+                DGV_Main.Columns[6].HeaderText = "Position Name";
+                DGV_Main.Columns[6].Width = 150;
+            }
+            else
+            {
+                frmMsg.Icon = MessageDialogIcon.Warning;
+                frmMsg.Caption = "Logs are Empty.";
+                frmMsg.Text = "there is not any rows to show.";
+            }
         }
         public void ListAllDepartments()
         {
@@ -111,28 +120,46 @@ namespace PresentationLayer_EMS
             Settings.DataGridViewStyles(DGV_Department);
             BindingSource bs = new BindingSource();
             bs.DataSource = clsDepartment.GetAllDepartments();
-            DGV_Department.DataSource = bs;
-            DGV_Department.Columns[0].Width = 100;
-            DGV_Department.Columns[1].Width = 400;
-            DGV_Department.Columns[2].Width = 200;
+            if (bs.Count > 0)
+            {
+                DGV_Department.DataSource = bs;
+                DGV_Department.Columns[0].Width = 100;
+                DGV_Department.Columns[1].Width = 400;
+                DGV_Department.Columns[2].Width = 200;
 
-
+            }
+            else
+            {
+                frmMsg.Icon = MessageDialogIcon.Warning;
+                frmMsg.Caption = "Logs are Empty.";
+                frmMsg.Text = "there is not any rows to show.";
+            }
         }
+        
         public void ListAllUsers()
         {
             // Users Data List
             Settings.DataGridViewStyles(DGV_Users);
             BindingSource bs = new BindingSource();
             bs.DataSource = clsUsers.GetAllUsers();
-            DGV_Users.DataSource = bs;
-            DGV_Users.Columns[0].HeaderText = "ID";
-            DGV_Users.Columns[0].Width = 35;
-            DGV_Users.Columns[1].HeaderText = "User Name";
-            DGV_Users.Columns[1].Width = 100;
-            DGV_Users.Columns[2].HeaderText = "Password";
-            DGV_Users.Columns[2].Width = 100;
-            DGV_Users.Columns[3].HeaderText = "Roles";
-            DGV_Users.Columns[3].Width = 150;
+            if (bs.Count > 0)
+            {
+                DGV_Users.DataSource = bs;
+                DGV_Users.Columns[0].HeaderText = "ID";
+                DGV_Users.Columns[0].Width = 35;
+                DGV_Users.Columns[1].HeaderText = "User Name";
+                DGV_Users.Columns[1].Width = 100;
+                DGV_Users.Columns[2].HeaderText = "Password";
+                DGV_Users.Columns[2].Width = 100;
+                DGV_Users.Columns[3].HeaderText = "Roles";
+                DGV_Users.Columns[3].Width = 150;
+            }
+            else
+            {
+                frmMsg.Icon = MessageDialogIcon.Warning;
+                frmMsg.Caption = "Logs are Empty.";
+                frmMsg.Text = "there is not any rows to show.";
+            }
         }
         public void ListAllLogs()
         {
@@ -265,6 +292,22 @@ namespace PresentationLayer_EMS
             clsLogs.ClearAllLogs();
             DGV_Logs.DataSource = null;
             DGV_Logs.DataSource = clsLogs.GetAllLogs();
+        }
+
+        private void DGV_Main_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            MessageBox.Show("Clicked");
+        }
+
+        private void DGV_Main_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int ID = (int)DGV_Main.CurrentRow.Cells[0].Value;
+            if (e.ColumnIndex >= 0 && e.ColumnIndex <= 1)
+            {
+                frmShowEmployeeCard frm2 = new frmShowEmployeeCard(ID);
+                frm2.ShowDialog();
+            }
+
         }
     }
 }

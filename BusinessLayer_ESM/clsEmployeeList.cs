@@ -34,5 +34,10 @@ namespace BusinessLayer_ESM
 
             return false;
         }
+
+        public static DataTable GetEmployeeCardByID(int ID)
+        {
+            return clsEmployeeDataList.GetEmployeeCardByID(ID);
+        }
     }
 }
