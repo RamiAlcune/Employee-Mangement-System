@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Employee\Controls\ctrlEmployeeUpdate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Employee\Controls\ctrlEmployeeUpdate.Designer.cs">
+      <DependentUpon>ctrlEmployeeUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Employee\frmAddNewEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,12 @@
     <Compile Include="Employee\frmShowEmployeeCard.Designer.cs">
       <DependentUpon>frmShowEmployeeCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUpdateEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateEmployee.Designer.cs">
+      <DependentUpon>frmUpdateEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +103,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="Employee\Controls\ctrlEmployeeUpdate.resx">
+      <DependentUpon>ctrlEmployeeUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Employee\frmAddNewEmployee.resx">
       <DependentUpon>frmAddNewEmployee.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Employee\frmShowEmployeeCard.resx">
       <DependentUpon>frmShowEmployeeCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateEmployee.resx">
+      <DependentUpon>frmUpdateEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

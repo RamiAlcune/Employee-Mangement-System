@@ -2,6 +2,7 @@
 using BusinessLayer_ESM.Properties;
 using Guna.UI2.WinForms;
 using PresentationLayer_EMS.Employee;
+using PresentationLayer_EMS.Employee.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,13 +22,12 @@ namespace PresentationLayer_EMS
  
     public partial class frmMain : Form
     {
-        
         private static DataTable _EmployeesList = clsEmployeeList.GetEmployeeList();
         public frmMain()
         {
             InitializeComponent();
             ContextMenuEffects();
-
+           
 
         }
         public void ContextMenuEffects()
@@ -83,7 +83,7 @@ namespace PresentationLayer_EMS
             ListAllEmployees();
         }
 
-    public void ListAllEmployees()
+    public  void ListAllEmployees()
         {
             Settings.DataGridViewStyles(DGV_Main);
             BindingSource bs = new BindingSource();
@@ -283,6 +283,7 @@ namespace PresentationLayer_EMS
 
         private void btnAddNewEmployee_Click(object sender, EventArgs e)
         {
+            int ID = int.Parse(DGV_Main.CurrentRow.Cells[0].Value.ToString());
             frmAddNewEmployee frm2 = new frmAddNewEmployee();
             frm2.ShowDialog();
         }
@@ -308,6 +309,19 @@ namespace PresentationLayer_EMS
                 frm2.ShowDialog();
             }
 
+        }
+
+        private void sssToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddNewEmployee frm2 = new frmAddNewEmployee();
+            frm2.ShowDialog();
+        }
+
+        private void btnEditEmployee_Click(object sender, EventArgs e)
+        {
+            int ID = (int)DGV_Main.CurrentRow.Cells[0].Value;
+            frmUpdateEmployee frm = new frmUpdateEmployee(ID);
+            frm.ShowDialog();
         }
     }
 }

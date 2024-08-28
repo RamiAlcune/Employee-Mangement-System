@@ -212,6 +212,7 @@
             this.btnEditEmployee.Size = new System.Drawing.Size(280, 71);
             this.btnEditEmployee.TabIndex = 11;
             this.btnEditEmployee.Text = "Edit";
+            this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
             // 
             // tbMainSearchingByName
             // 
@@ -325,6 +326,7 @@
             this.sssToolStripMenuItem.Name = "sssToolStripMenuItem";
             this.sssToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.sssToolStripMenuItem.Text = "Edit Employee";
+            this.sssToolStripMenuItem.Click += new System.EventHandler(this.sssToolStripMenuItem_Click);
             // 
             // deleteEmployeeToolStripMenuItem
             // 

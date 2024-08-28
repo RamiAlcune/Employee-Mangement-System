@@ -28,8 +28,6 @@ namespace PresentationLayer_EMS.Employee
 
         }
 
-
-
         public void ShowProfileDetails()
         {
             DataTable dt = new DataTable();
@@ -68,6 +66,11 @@ namespace PresentationLayer_EMS.Employee
             string Notes = row["ExtraNotes"].ToString();
             frmExtraNotes frm = new frmExtraNotes(Notes);
             frm.ShowDialog();
+        }
+
+        private void frmShowEmployeeCard_Load(object sender, EventArgs e)
+        {
+        
         }
     }
 }
