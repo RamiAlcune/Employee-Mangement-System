@@ -13,7 +13,6 @@ namespace PresentationLayer_EMS
 {
     public partial class frmUpdateEmployee : Form
     {
-        public event Action RefreshTable;
         public static int EmployeeID = -1;
         public frmUpdateEmployee(int ID)
         {
@@ -28,11 +27,6 @@ namespace PresentationLayer_EMS
         {
             this.Close();
             
-        }
-
-        private void frmUpdateEmployee_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            RefreshTable?.Invoke();
         }
     }
 }

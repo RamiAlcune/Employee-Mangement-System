@@ -46,7 +46,7 @@
             this.ClientSize = new System.Drawing.Size(597, 625);
             this.Controls.Add(this.ctrlEmployeeUpdate2);
             this.Name = "frmUpdateEmployee";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUpdateEmployee_FormClosing);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
 
         }

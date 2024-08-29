@@ -1,18 +1,22 @@
 ﻿using BusinessLayer_ESM;
 using BusinessLayer_ESM.Properties;
 using Guna.UI2.WinForms;
+using PresentationLayer_EMS.Department;
 using PresentationLayer_EMS.Employee;
 using PresentationLayer_EMS.Employee.Controls;
+using PresentationLayer_EMS.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
@@ -26,65 +30,55 @@ namespace PresentationLayer_EMS
         public frmMain()
         {
             InitializeComponent();
-            ContextMenuEffects();
-           
+            ContextMenuEffects(MainMenu);
+            ContextMenuEffects(cmUsers);
+
 
         }
-        public void ContextMenuEffects()
+
+        public  void LoadAllTabs()
         {
-            MainMenu.BackColor = Color.FromArgb(45, 45, 48);
-            MainMenu.ForeColor = Color.White;
-            MainMenu.RenderStyle.ArrowColor = Color.White;
-            MainMenu.RenderStyle.SelectionBackColor = Color.FromArgb(63, 63, 70);
-            MainMenu.RenderStyle.SelectionForeColor = Color.White;
-            MainMenu.RenderStyle.BorderColor = Color.FromArgb(28, 28, 28);
-            MainMenu.RenderStyle.RoundedEdges = true;
+            ListAllEmployees();
+            ListAllDepartments();
+            ListAllLogs();
+            ListAllPositions();
+            ListAllUsers();
+            ListAllSalary();
+        }
+        public void ContextMenuEffects(Guna2ContextMenuStrip test)
+        {
+            test.BackColor = Color.FromArgb(45, 45, 48);
+            test.ForeColor = Color.White;
+            test.RenderStyle.ArrowColor = Color.White;
+            test.RenderStyle.SelectionBackColor = Color.FromArgb(63, 63, 70);
+            test.RenderStyle.SelectionForeColor = Color.White;
+            test.RenderStyle.BorderColor = Color.FromArgb(28, 28, 28);
+            test.RenderStyle.RoundedEdges = true;
         }
 
 
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TabPage CurrentlySelected = TabControl1.SelectedTab;
+            TabPage CurrentlySelected = tab.SelectedTab;
             lblTitle.Text = $"EMS~{CurrentlySelected.Text}";
-            int Cases = TabControl1.SelectedIndex;
-            switch ((Cases))
-            {
-                case 0:
-
-                    ListAllEmployees();
-                    break;
-                case 1:
-                    ListAllDepartments();
-
-                    break;
-                case 2:
-                    //Should Add Method
-                    break;
-
-                case 3:
-                    //Should Add Method
-                    break;
-
-                case 4:
-                    ListAllUsers();
-                    break;
-
-                case 5:
-                    ListAllLogs();
-                    break;
-
-
-            }
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ListAllEmployees();
+            Thread th1 = new Thread(LoadAllTabs);
+            th1.Start();
         }
 
     public  void ListAllEmployees()
         {
+            if (DGV_Main.InvokeRequired)
+            {
+                DGV_Main.Invoke(new Action(ListAllEmployees));
+                return;
+            }
+
+
             Settings.DataGridViewStyles(DGV_Main);
             BindingSource bs = new BindingSource();
             bs.DataSource = clsEmployeeList.GetEmployeeList();
@@ -114,8 +108,53 @@ namespace PresentationLayer_EMS
                 frmMsg.Text = "there is not any rows to show.";
             }
         }
+
+
+        public void ListAllSalary()
+        {
+            if (DGV_Salary.InvokeRequired)
+            {
+                DGV_Main.Invoke(new Action(ListAllSalary));
+                return;
+            }
+
+
+            Settings.DataGridViewStyles(DGV_Salary);
+            BindingSource bs = new BindingSource();
+            bs.DataSource = clsSalary.GetAllSalary();
+            if (bs.Count > 0)
+            {
+                DGV_Salary.DataSource = bs;
+                //Salary Data List:
+                DGV_Salary.Columns[0].HeaderText = "EmployeeID";
+                DGV_Salary.Columns[0].Width = 50;
+                DGV_Salary.Columns[1].HeaderText = "First Name";
+                DGV_Salary.Columns[1].Width = 100;
+                DGV_Salary.Columns[2].HeaderText = "Last Name";
+                DGV_Salary.Columns[2].Width = 100;
+                DGV_Salary.Columns[3].HeaderText = "Amount";
+                DGV_Salary.Columns[3].Width = 150;
+                DGV_Salary.Columns[4].HeaderText = "Salary Date";
+                DGV_Salary.Columns[4].Width = 100;
+            }
+            else
+            {
+                frmMsg.Icon = MessageDialogIcon.Warning;
+                frmMsg.Caption = "Salary are Empty.";
+                frmMsg.Text = "there is not any rows to show.";
+            }
+        }
+
+
+
         public void ListAllDepartments()
         {
+            if (DGV_Department.InvokeRequired)
+            {
+                DGV_Department.Invoke(new Action(ListAllDepartments));
+                return;
+            }
+
             // Departmenet Data List:
             Settings.DataGridViewStyles(DGV_Department);
             BindingSource bs = new BindingSource();
@@ -138,6 +177,12 @@ namespace PresentationLayer_EMS
         
         public void ListAllUsers()
         {
+            if (DGV_Users.InvokeRequired)
+            {
+                DGV_Users.Invoke(new Action(ListAllUsers));
+                return;
+            }
+
             // Users Data List
             Settings.DataGridViewStyles(DGV_Users);
             BindingSource bs = new BindingSource();
@@ -163,6 +208,11 @@ namespace PresentationLayer_EMS
         }
         public void ListAllLogs()
         {
+            if (DGV_Logs.InvokeRequired)
+            {
+                DGV_Logs.Invoke(new Action(ListAllLogs));
+                return;
+            }
             BindingSource bs = new BindingSource();
             bs.DataSource = clsLogs.GetAllLogs();
             if (bs.Count > 0) { 
@@ -180,6 +230,28 @@ namespace PresentationLayer_EMS
                 frmMsg.Icon = MessageDialogIcon.Warning;
                 frmMsg.Caption = "Logs are Empty.";
                 frmMsg.Text = "there is not any rows to show.";
+            }
+        }
+
+        public void ListAllPositions()
+        {
+            if (DGV_Positions.InvokeRequired)
+            {
+                DGV_Positions.Invoke(new Action(ListAllPositions));
+                return;
+            }
+
+            BindingSource bs = new BindingSource();
+            bs.DataSource = clsPosition.GetAllPositions();
+            if (bs.Count > 0)
+            {
+                Settings.DataGridViewStyles(DGV_Positions);
+                DGV_Positions.DataSource = bs;
+                DGV_Positions.Columns[0].HeaderText = "Position ID";
+                DGV_Positions.Columns[0].Width = 100;
+                DGV_Positions.Columns[1].HeaderText = "Position Name";
+                DGV_Positions.Columns[1].Width = 600;
+
             }
         }
 
@@ -211,6 +283,10 @@ namespace PresentationLayer_EMS
         {
             (DGV_Department.DataSource as BindingSource).Filter = $"DepartmentName LIKE '%{tbDepartmentSearch.Text.ToLower()}%'";
         }
+        private void tbSearchPosition_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            (DGV_Positions.DataSource as BindingSource).Filter = $"PositionName LIKE '%{tbSearchPosition.Text.ToLower()}%'";
+        }
 
 
         private void deleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -238,6 +314,7 @@ namespace PresentationLayer_EMS
 
         private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
+            
             if (!PermissionsON(e.TabPage))
             {
                 e.Cancel = true;
@@ -248,10 +325,6 @@ namespace PresentationLayer_EMS
         {
             DGV_Main.DataSource = null;
             DGV_Main.DataSource = clsEmployeeList.GetEmployeeList();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
         }
 
         private void ssToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,6 +359,7 @@ namespace PresentationLayer_EMS
             int ID = int.Parse(DGV_Main.CurrentRow.Cells[0].Value.ToString());
             frmAddNewEmployee frm2 = new frmAddNewEmployee();
             frm2.ShowDialog();
+            if (!frm2.Visible) ListAllEmployees();
         }
 
         private void btnClearAllLogs_Click(object sender, EventArgs e)
@@ -307,6 +381,7 @@ namespace PresentationLayer_EMS
             {
                 frmShowEmployeeCard frm2 = new frmShowEmployeeCard(ID);
                 frm2.ShowDialog();
+
             }
 
         }
@@ -315,13 +390,88 @@ namespace PresentationLayer_EMS
         {
             frmAddNewEmployee frm2 = new frmAddNewEmployee();
             frm2.ShowDialog();
+            if (!frm2.Visible) ListAllEmployees();
         }
 
-        private void btnEditEmployee_Click(object sender, EventArgs e)
+
+        private void btnAddNewPosition_Click(object sender, EventArgs e)
         {
-            int ID = (int)DGV_Main.CurrentRow.Cells[0].Value;
-            frmUpdateEmployee frm = new frmUpdateEmployee(ID);
+            frmAddNewPosition frm = new frmAddNewPosition();
             frm.ShowDialog();
+            if (!frm.Visible) ListAllPositions();
+
         }
+
+        private void btnDeletePosition_Click(object sender, EventArgs e)
+        {
+            if (clsPosition.DeletePosition((int)DGV_Positions.CurrentRow.Cells[0].Value))
+            {
+                clsLogs.NewActionSaved("Position", $"Deleted", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
+                ListAllPositions();
+            }
+            else MessageBox.Show("ERROR");
+        }
+
+        private void AddNewUserToolStrip_Click(object sender, EventArgs e)
+        {
+            frmAddNewUser frm = new frmAddNewUser();
+            frm.ShowDialog();
+            if(!frm.Visible) ListAllUsers();
+        }
+
+        private void DeleteUserToolStrip_Click(object sender, EventArgs e)
+        {
+            if (clsUsers.DeleteUser((int)DGV_Users.CurrentRow.Cells[0].Value))
+            {
+                clsLogs.NewActionSaved("Users", $"Deleted ", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
+                ListAllUsers();
+            }
+            else MessageBox.Show("ERROR");
+        }
+
+        private void ChangeUserPasswordToolStrip_Click(object sender, EventArgs e)
+        {
+            frmUsersChangePassword frm = new frmUsersChangePassword((int)DGV_Users.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            if(!frm.Visible) ListAllUsers();
+        }
+
+        private void btnAddDepartment_Click(object sender, EventArgs e)
+        {
+            Settings.DepartmentAddFalseOrUpdateTrue = false;
+            frmAddNewDepartment frm = new frmAddNewDepartment();
+            frm.ShowDialog();
+            if(!frm.Visible) ListAllDepartments();
+        }
+
+        private void btnEditEmployee_Click_1(object sender, EventArgs e)
+        {
+            frmAddNewEmployee frm2 = new frmAddNewEmployee();
+            frm2.ShowDialog();
+            if (!frm2.Visible) ListAllEmployees();
+        }
+
+        private void btnEditDepartment_Click(object sender, EventArgs e)
+        {
+            Settings.CurrentDepartmentName = (string)DGV_Department.CurrentRow.Cells[1].Value;
+            Settings.DepartmentAddFalseOrUpdateTrue = true;
+            Settings.DepartmentCurrentRow = (int)DGV_Department.CurrentRow.Cells[0].Value;
+            frmAddNewDepartment frm = new frmAddNewDepartment();
+            frm.ShowDialog();
+            if (!frm.Visible) ListAllDepartments();
+        }
+
+        private void btnDeleteDepartment_Click(object sender, EventArgs e)
+        {
+            if (clsDepartment.DeleteDepartment((int)DGV_Department.CurrentRow.Cells[0].Value))
+            {
+                clsLogs.NewActionSaved("Department", $"Deleted ", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
+                ListAllDepartments();
+            }
+
+
+            else MessageBox.Show("ERROR");
+        }
+        
     }
 }

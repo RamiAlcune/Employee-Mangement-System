@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,6 +12,9 @@ namespace PresentationLayer_EMS
 {
     public static  class Settings
     {
+        public static bool DepartmentAddFalseOrUpdateTrue = false;
+        public static int DepartmentCurrentRow = -1;
+        public static string CurrentDepartmentName = "";
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
@@ -46,7 +50,7 @@ namespace PresentationLayer_EMS
             DataView.AllowUserToResizeColumns = false;
             DataView.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(45, 45, 48);
             DataView.AlternatingRowsDefaultCellStyle.ForeColor = Color.White;
-            DataView.ColumnHeadersHeight = 30;
+            DataView.ColumnHeadersHeight = 25;
             DataView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(185, 63, 60);
@@ -69,6 +73,14 @@ namespace PresentationLayer_EMS
                 }
             }
 
+        }
+        static string ComputeHash(string input)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
         }
     }
 }

@@ -46,34 +46,39 @@ ORDER BY
             return dt;
         }
 
-        public static void UpdateDepartment(ref int DepartmentID, ref int DepartmentName)
+        public static bool UpdateDepartment(int DepartmentID, string DepartmentName)
         {
-            string query = @"INSERT INTO Employee (FirstName,LastName,Email,Phone,HireDate,DepartmentID) VALUES (@FirstName,@LastName,@Email,@Phone,@HireDate,@DepartmentID)";
+            string query = @"UPDATE Department SET DepartmentName = @DepartmentName WHERE DepartmentID = @DepartmentID";
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
                 try
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@DepartmentName", DepartmentName);
+                        command.Parameters.AddWithValue("@DepartmentID", DepartmentID);
                         connection.Open();
                         command.ExecuteNonQuery();
                     }
+                    return true;
                 }
                 catch (SqlException ex)
                 {
                     Console.WriteLine($"SQL Error: {ex.Message}");
+                    return false;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error: {ex.Message}");
+                    return false;
                 }
             }
         }
 
-        public static bool AddNewEmployee(int DepartmentName)
+        public static bool AddNewDepartment(string DepartmentName)
         {
             int rowAffected = 0;
-            string query = @"INSERT INTO Employee (DepartmentName) VALUES (@DepartmentName)";
+            string query = @"INSERT INTO Department (DepartmentName) VALUES (@DepartmentName)";
 
             using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
             {
@@ -129,5 +134,39 @@ ORDER BY
             }
             return dt;
         }
+
+
+
+        public static bool DeleteDepartment(int DepartmentID)
+        {
+            int rowaffected = 0;
+            string query = @"DELETE FROM dbo.Department WHERE DepartmentID = @DepartmentID";
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@DepartmentID", DepartmentID);
+                        connection.Open();
+                        rowaffected = command.ExecuteNonQuery();
+                        if (rowaffected > 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"SQL Error: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+            }
+            return false;
+        }
+
     }
 }

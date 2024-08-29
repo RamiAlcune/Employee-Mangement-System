@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,26 @@ namespace BusinessLayer_ESM.Properties
             return clsUsersData.GetUserNameIdFromUserName(UserName);
 
         }
+
+        public static bool DeleteUser(int ID)
+        {
+            return clsUsersData.DeleteUser(ID);
+        }
+
+        public static DataTable GetAllUserRoles()
+        {
+            return clsUsersData.GetAllUserRoles();
+        }
+        public static bool AddNewUser(string UserName, string Password, int IDUserRoles)
+        {
+            return clsUsersData.AddNewUser(UserName, Password, IDUserRoles);
+        }
+
+        public static void ChangeUserPassword(int IDUsers,string NewPassword)
+        {
+            clsUsersData.ChangeUserPassword(IDUsers, NewPassword);
+        }
+
+
     }
 }

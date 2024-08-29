@@ -1,10 +1,8 @@
 ﻿using BusinessLayer_ESM.Properties;
+using Microsoft.Win32;
+using PresentationLayer_EMS.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,11 +12,24 @@ namespace PresentationLayer_EMS
 {
     public partial class frmLogin : Form
     {
+        string PathWR = @"HKEY_LOCAL_MACHINE\SOFTWARE\EsmRememberedUsers";
+
         public static int currentPermissions = -1;
         public frmLogin()
         {
             InitializeComponent();
+            tbPassword.PasswordChar = '*';
+            string UserName = Registry.GetValue(PathWR,"UserName", null) as string;
+            string Password = Registry.GetValue(PathWR, "Password", null) as string;
+            if(UserName != null &&  Password != null)
+            {
+                tbUserName.Text = UserName;
+                tbPassword.Text = Password;
+            }
+
         }
+
+
         public static int UserNameIdFromFrmLogin = -1;
         private void PnlLogin_MouseDown(object sender, MouseEventArgs e)
         {
@@ -34,6 +45,16 @@ namespace PresentationLayer_EMS
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
+            
+
+            if (cbRememberMe.Checked)
+            {
+                Registry.SetValue(PathWR, "UserName", tbUserName.Text, RegistryValueKind.String);
+                Registry.SetValue(PathWR, "Password", tbPassword.Text, RegistryValueKind.String);
+            }
+
+
+
             AnimationEffect.Start();
             AnimationEffect.Visible = true;
 
@@ -60,5 +81,20 @@ namespace PresentationLayer_EMS
             btnLogin.Enabled = true;
         }
 
+        private void BtnHide_Click(object sender, EventArgs e)
+        {
+            if (tbPassword.PasswordChar == '*')
+            {
+                BtnHide.Image = Resources.eye;
+                tbPassword.PasswordChar = '\0';
+            }
+            else
+            {
+                BtnHide.Image = Resources.hide;
+                tbPassword.PasswordChar = '*';
+            }
+
+            tbPassword.Refresh();
+        }
     }
 }

@@ -14,5 +14,17 @@ namespace BusinessLayer_ESM
         {
             return clsPositionData.GetAllPositions();
         }
+
+        public static bool AddNewPosition(string PositionName)
+        {
+            return clsPositionData.AddNewPosition(PositionName);
+        }
+
+        public static bool DeletePosition(int PositionId)
+        {
+            return clsPositionData.DeletePosition(PositionId);
+
+
+        }
     }
 }

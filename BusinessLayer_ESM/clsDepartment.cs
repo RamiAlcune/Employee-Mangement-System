@@ -30,5 +30,22 @@ namespace BusinessLayer_ESM
 
         return clsDepartmentData.GetAllDepartmentName();
         }
+
+        public static bool AddNewDepartment(string Department)
+        {
+            if (clsDepartmentData.AddNewDepartment(Department)) return true;
+
+            return false;   
+        }
+
+        public static bool UpdateDepartment(int DepartmentID, string DepartmentName)
+        {
+            return clsDepartmentData.UpdateDepartment(DepartmentID, DepartmentName);
+        }
+
+        public static bool DeleteDepartment(int DepartmentID) { 
+        return clsDepartmentData.DeleteDepartment(DepartmentID);
+        }
+
     }
 }

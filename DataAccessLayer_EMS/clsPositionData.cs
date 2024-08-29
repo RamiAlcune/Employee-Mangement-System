@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
+using System.Security.Policy;
 
 namespace DataAccessLayer_EMS
 {
@@ -36,6 +38,70 @@ namespace DataAccessLayer_EMS
                 }
             }
             return dt;
+        }
+
+
+
+        public static bool AddNewPosition(string PositionName)
+        {
+            string query = "INSERT INTO Position (PositionName) VALUES (@PositionName)";
+            int rowaffected = 0;
+            using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@PositionName", PositionName);
+                        connection.Open();
+                        rowaffected = command.ExecuteNonQuery();
+                        if (rowaffected > 0) return true;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"SQL Error: {ex.Message}");
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool DeletePosition(int PositionID)
+        {
+                int rowaffected = 0;
+                string query = @"DELETE FROM Position WHERE PositionID = @PositionID";
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                {
+                    try
+                    {
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@PositionID", PositionID);
+                            connection.Open();
+                            rowaffected = command.ExecuteNonQuery();
+                            if (rowaffected > 0)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        Console.WriteLine($"SQL Error: {ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
+                }
+                return false;
         }
     }
 }

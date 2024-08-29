@@ -36,10 +36,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnLogin = new Guna.UI2.WinForms.Guna2Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.AnimationEffect = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
+            this.BtnHide = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tbUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.tbPassword = new Guna.UI2.WinForms.Guna2TextBox();
-            this.AnimationEffect = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
+            this.cbRememberMe = new Guna.UI2.WinForms.Guna2CheckBox();
             this.PnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).BeginInit();
@@ -126,7 +128,7 @@
             this.btnLogin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.IndicateFocus = true;
-            this.btnLogin.Location = new System.Drawing.Point(3, 373);
+            this.btnLogin.Location = new System.Drawing.Point(3, 410);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(294, 35);
             this.btnLogin.TabIndex = 2;
@@ -143,6 +145,33 @@
             this.label1.Size = new System.Drawing.Size(161, 24);
             this.label1.TabIndex = 10;
             this.label1.Text = "Welcome Back";
+            // 
+            // AnimationEffect
+            // 
+            this.AnimationEffect.Location = new System.Drawing.Point(114, 451);
+            this.AnimationEffect.Name = "AnimationEffect";
+            this.AnimationEffect.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(186)))), ((int)(((byte)(188)))));
+            this.AnimationEffect.Size = new System.Drawing.Size(63, 55);
+            this.AnimationEffect.TabIndex = 12;
+            this.AnimationEffect.TabStop = false;
+            this.AnimationEffect.Visible = false;
+            // 
+            // BtnHide
+            // 
+            this.BtnHide.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BtnHide.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BtnHide.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BtnHide.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BtnHide.FillColor = System.Drawing.Color.White;
+            this.BtnHide.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BtnHide.ForeColor = System.Drawing.Color.White;
+            this.BtnHide.Image = global::PresentationLayer_EMS.Properties.Resources.hide;
+            this.BtnHide.Location = new System.Drawing.Point(261, 316);
+            this.BtnHide.Name = "BtnHide";
+            this.BtnHide.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.BtnHide.Size = new System.Drawing.Size(32, 32);
+            this.BtnHide.TabIndex = 13;
+            this.BtnHide.Click += new System.EventHandler(this.BtnHide_Click);
             // 
             // guna2CirclePictureBox2
             // 
@@ -200,28 +229,39 @@
             this.tbPassword.Location = new System.Drawing.Point(48, 316);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.PasswordChar = '\0';
             this.tbPassword.PlaceholderText = "********";
             this.tbPassword.SelectedText = "";
             this.tbPassword.Size = new System.Drawing.Size(206, 32);
             this.tbPassword.TabIndex = 1;
             // 
-            // AnimationEffect
+            // cbRememberMe
             // 
-            this.AnimationEffect.Location = new System.Drawing.Point(114, 414);
-            this.AnimationEffect.Name = "AnimationEffect";
-            this.AnimationEffect.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(186)))), ((int)(((byte)(188)))));
-            this.AnimationEffect.Size = new System.Drawing.Size(63, 55);
-            this.AnimationEffect.TabIndex = 12;
-            this.AnimationEffect.TabStop = false;
-            this.AnimationEffect.Visible = false;
+            this.cbRememberMe.AutoSize = true;
+            this.cbRememberMe.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(15)))), ((int)(((byte)(31)))));
+            this.cbRememberMe.CheckedState.BorderRadius = 0;
+            this.cbRememberMe.CheckedState.BorderThickness = 0;
+            this.cbRememberMe.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbRememberMe.CheckMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(15)))), ((int)(((byte)(31)))));
+            this.cbRememberMe.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
+            this.cbRememberMe.Location = new System.Drawing.Point(75, 355);
+            this.cbRememberMe.Name = "cbRememberMe";
+            this.cbRememberMe.Size = new System.Drawing.Size(130, 22);
+            this.cbRememberMe.TabIndex = 14;
+            this.cbRememberMe.Text = "Remember Me";
+            this.cbRememberMe.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbRememberMe.UncheckedState.BorderRadius = 0;
+            this.cbRememberMe.UncheckedState.BorderThickness = 0;
+            this.cbRememberMe.UncheckedState.FillColor = System.Drawing.Color.White;
             // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(48)))), ((int)(((byte)(54)))));
-            this.ClientSize = new System.Drawing.Size(297, 471);
+            this.ClientSize = new System.Drawing.Size(297, 520);
+            this.Controls.Add(this.cbRememberMe);
+            this.Controls.Add(this.BtnHide);
             this.Controls.Add(this.AnimationEffect);
             this.Controls.Add(this.guna2CirclePictureBox2);
             this.Controls.Add(this.label1);
@@ -259,5 +299,7 @@
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox2;
         private Guna.UI2.WinForms.Guna2WinProgressIndicator AnimationEffect;
+        private Guna.UI2.WinForms.Guna2CircleButton BtnHide;
+        private Guna.UI2.WinForms.Guna2CheckBox cbRememberMe;
     }
 }

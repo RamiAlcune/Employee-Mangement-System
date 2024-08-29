@@ -69,6 +69,7 @@ namespace PresentationLayer_EMS.Employee.Controls
 
                     MessageBox.Show($"Has been Updated: [{tbFirstName.Text} {tbLastName.Text}]", msgBox.Caption = $"Message From DataBase", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await Task.Run(() => clsLogs.NewActionSaved("Employee", $"Updated", DateTime.Now, frmLogin.UserNameIdFromFrmLogin));
+                    clsLogs.NewActionSaved("Employee", "Update", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
                     BooleanCheck?.Invoke(this, e);
 
 
