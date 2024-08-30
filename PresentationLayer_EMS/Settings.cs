@@ -12,6 +12,7 @@ namespace PresentationLayer_EMS
 {
     public static  class Settings
     {
+        public static int EmployeeUpdatedRow = -1;
         public static bool DepartmentAddFalseOrUpdateTrue = false;
         public static int DepartmentCurrentRow = -1;
         public static string CurrentDepartmentName = "";

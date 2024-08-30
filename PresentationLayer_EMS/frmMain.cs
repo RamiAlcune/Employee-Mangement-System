@@ -3,7 +3,6 @@ using BusinessLayer_ESM.Properties;
 using Guna.UI2.WinForms;
 using PresentationLayer_EMS.Department;
 using PresentationLayer_EMS.Employee;
-using PresentationLayer_EMS.Employee.Controls;
 using PresentationLayer_EMS.Users;
 using System;
 using System.Collections.Generic;
@@ -40,10 +39,10 @@ namespace PresentationLayer_EMS
         {
             ListAllEmployees();
             ListAllDepartments();
-            ListAllLogs();
             ListAllPositions();
             ListAllUsers();
             ListAllSalary();
+            ListAllLogs();
         }
         public void ContextMenuEffects(Guna2ContextMenuStrip test)
         {
@@ -267,26 +266,49 @@ namespace PresentationLayer_EMS
 
         private void tbLogsSearchingByUserName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            (DGV_Logs.DataSource as BindingSource).Filter = $"UserName LIKE '%{tbLogsSearchingByUserName.Text.ToLower()}%'";
+            var bindingSource = DGV_Logs.DataSource as BindingSource;
+            if (bindingSource != null)
+            {
+                bindingSource.Filter = $"UserName LIKE '%{tbLogsSearchingByUserName.Text.ToLower()}%'";
+            }
         }
 
         private void tbMainSearchingByName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            (DGV_Main.DataSource as BindingSource).Filter = $"FirstName LIKE '%{tbMainSearchingByName.Text.ToLower()}%'";
+            var bindingSource = DGV_Main.DataSource as BindingSource;
+            if (bindingSource != null)
+            {
+                bindingSource.Filter = $"FirstName LIKE '%{tbMainSearchingByName.Text.ToLower()}%'";
+            }
         }
 
         private void tbSearchByRole_KeyPress(object sender, KeyPressEventArgs e)
         {
-            (DGV_Users.DataSource as BindingSource).Filter = $"Roles LIKE '%{tbSearchByRole.Text.ToLower()}%'";
+            var bindingSource = DGV_Users.DataSource as BindingSource;
+            if (bindingSource != null)
+            {
+                bindingSource.Filter = $"Roles LIKE '%{tbSearchByRole.Text.ToLower()}%'";
+            }
         }
+
         private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            (DGV_Department.DataSource as BindingSource).Filter = $"DepartmentName LIKE '%{tbDepartmentSearch.Text.ToLower()}%'";
+            var bindingSource = DGV_Department.DataSource as BindingSource;
+            if (bindingSource != null)
+            {
+                bindingSource.Filter = $"DepartmentName LIKE '%{tbDepartmentSearch.Text.ToLower()}%'";
+            }
         }
+
         private void tbSearchPosition_KeyPress(object sender, KeyPressEventArgs e)
         {
-            (DGV_Positions.DataSource as BindingSource).Filter = $"PositionName LIKE '%{tbSearchPosition.Text.ToLower()}%'";
+            var bindingSource = DGV_Positions.DataSource as BindingSource;
+            if (bindingSource != null)
+            {
+                bindingSource.Filter = $"PositionName LIKE '%{tbSearchPosition.Text.ToLower()}%'";
+            }
         }
+
 
 
         private void deleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -388,7 +410,8 @@ namespace PresentationLayer_EMS
 
         private void sssToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddNewEmployee frm2 = new frmAddNewEmployee();
+            Settings.EmployeeUpdatedRow = (int)DGV_Main.CurrentRow.Cells[0].Value;
+            frmUpdateEmployee frm2 = new frmUpdateEmployee();
             frm2.ShowDialog();
             if (!frm2.Visible) ListAllEmployees();
         }
@@ -446,7 +469,8 @@ namespace PresentationLayer_EMS
 
         private void btnEditEmployee_Click_1(object sender, EventArgs e)
         {
-            frmAddNewEmployee frm2 = new frmAddNewEmployee();
+            Settings.EmployeeUpdatedRow = (int)DGV_Main.CurrentRow.Cells[0].Value;
+            frmUpdateEmployee frm2 = new frmUpdateEmployee();
             frm2.ShowDialog();
             if (!frm2.Visible) ListAllEmployees();
         }
@@ -472,6 +496,10 @@ namespace PresentationLayer_EMS
 
             else MessageBox.Show("ERROR");
         }
-        
+
+        private void btnLogsRefresh_Click_1(object sender, EventArgs e)
+        {
+            ListAllLogs();
+        }
     }
 }

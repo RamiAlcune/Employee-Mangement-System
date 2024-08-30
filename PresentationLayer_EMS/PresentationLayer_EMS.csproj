@@ -64,12 +64,6 @@
     <Compile Include="Position\frmAddNewPosition.Designer.cs">
       <DependentUpon>frmAddNewPosition.cs</DependentUpon>
     </Compile>
-    <Compile Include="Employee\Controls\ctrlEmployeeUpdate.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Employee\Controls\ctrlEmployeeUpdate.Designer.cs">
-      <DependentUpon>ctrlEmployeeUpdate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Employee\frmAddNewEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,9 +126,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Position\frmAddNewPosition.resx">
       <DependentUpon>frmAddNewPosition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Employee\Controls\ctrlEmployeeUpdate.resx">
-      <DependentUpon>ctrlEmployeeUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Employee\frmAddNewEmployee.resx">
       <DependentUpon>frmAddNewEmployee.cs</DependentUpon>

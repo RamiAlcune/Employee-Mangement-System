@@ -30,12 +30,12 @@ namespace PresentationLayer_EMS
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            if (clsUsers.AddNewUser(tbUserName.Text, tbPassword.Text, int.Parse(cbUserRoles.SelectedValue.ToString())))
+            int Role = int.Parse(cbUserRoles.SelectedValue.ToString());
+            if (clsUsers.AddNewUser(tbUserName.Text, tbPassword.Text, Role))
             {
                 clsLogs.NewActionSaved("Users", $"Added New User ", DateTime.Now, frmLogin.UserNameIdFromFrmLogin);
                 this.Close();
             }
-            else MessageBox.Show("ERROR");
 
         }
 
